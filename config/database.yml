@@ -1,25 +1,40 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
-#
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see Rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
+  schema_search_path: 'curator,public'
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: curator_api_development
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { postgres } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { postgres } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { 'localhost' } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') { 5432 } %>
 
-# Warning: The database defined as "test" will be erased and
-# re-generated from your development database when you run "rake".
-# Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: db/test.sqlite3
+  database: curator_api_test
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { postgres } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { postgres } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { 'localhost' } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') { 5432 } %>
+
+staging:
+  <<: *default
+  database: curator_api_staging
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.secrets.dig(:postgres, :user) } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.secrets.dig(:postgres, :password) } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.secrets.dig(:postgres, :host) } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.secrets.dig(:postgres, :port) } %>
+
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: curator_api_production
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.secrets.dig(:postgres, :user) } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.secrets.dig(:postgres, :password) } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.secrets.dig(:postgres, :host) } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.secrets.dig(:postgres, :port) } %>
