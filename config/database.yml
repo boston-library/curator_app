@@ -25,16 +25,16 @@ test:
 staging:
   <<: *default
   database: curator_api_staging
-  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.secrets.dig(:postgres, :user) } %>
-  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.secrets.dig(:postgres, :password) } %>
-  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.secrets.dig(:postgres, :host) } %>
-  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.secrets.dig(:postgres, :port) } %>
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.credentials.dig(:postgres, :user) } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.credentials.dig(:postgres, :password) } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.credentials.dig(:postgres, :host) } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.credentials.dig(:postgres, :port) } %>
 
 
 production:
   <<: *default
   database: curator_api_production
-  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.secrets.dig(:postgres, :user) } %>
-  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.secrets.dig(:postgres, :password) } %>
-  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.secrets.dig(:postgres, :host) } %>
-  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.secrets.dig(:postgres, :port) } %>
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { Rails.application.credentials.dig(:postgres, :user) } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { Rails.application.credentials.dig(:postgres, :password) } %>
+  host: <%= ENV.fetch('CURATOR_API_PG_HOST') { Rails.application.credentials.dig(:postgres, :host) } %>
+  port: <%= ENV.fetch('CURATOR_API_PG_PORT') {  Rails.application.credentials.dig(:postgres, :port) } %>
