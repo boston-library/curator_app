@@ -1,7 +1,7 @@
 azure: &azure
   service: AzureStorage
-  storage_account_name: <%= ENV['AZURE_STORAGE_ACCOUNT_NAME'] %>
-  storage_access_key: <%= ENV['AZURE_STORAGE_ACCOUNT_KEY'] %>
+  storage_account_name: <%= Rails.application.credentials.dig(:azure, :account_name) %>
+  storage_access_key: <%= Rails.application.credentials.dig(:azure, :account_key) %>
 
 primary:
   <<: *azure

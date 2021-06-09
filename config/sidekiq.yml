@@ -1,0 +1,9 @@
+:concurrency: 5
+staging:
+  :concurrency: 4
+production:
+  :concurrency: 20
+:queues:
+  - filestream_derivatives
+  - indexing
+  - default

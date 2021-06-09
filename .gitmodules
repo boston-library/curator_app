@@ -1,3 +1,7 @@
 [submodule "solr-core-conf"]
 	path = solr
 	url = https://github.com/boston-library/solr-core-conf
+[submodule "solr"]
+	path = solr
+	url = git@github.com:boston-library/solr-core-conf.git
+	branch = dc3
