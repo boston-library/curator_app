@@ -9,16 +9,16 @@ default: &default
 development:
   <<: *default
   database: curator_api_development
-  username: <%= ENV.fetch('CURATOR_API_PG_USER') { postgres } %>
-  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { postgres } %>
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { 'postgres' } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { 'postgres' } %>
   host: <%= ENV.fetch('CURATOR_API_PG_HOST') { 'localhost' } %>
   port: <%= ENV.fetch('CURATOR_API_PG_PORT') { 5432 } %>
 
 test:
   <<: *default
   database: curator_api_test
-  username: <%= ENV.fetch('CURATOR_API_PG_USER') { postgres } %>
-  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { postgres } %>
+  username: <%= ENV.fetch('CURATOR_API_PG_USER') { 'postgres' } %>
+  password: <%= ENV.fetch('CURATOR_API_PG_PASS') { 'postgres' } %>
   host: <%= ENV.fetch('CURATOR_API_PG_HOST') { 'localhost' } %>
   port: <%= ENV.fetch('CURATOR_API_PG_PORT') { 5432 } %>
 

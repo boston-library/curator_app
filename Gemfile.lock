@@ -1,6 +1,5 @@
-GIT
-  remote: https://github.com/boston-library/curator.git
-  revision: 4acc4f79fe3b996ee41945534ddd8f4b07f59533
+PATH
+  remote: /home/bbarber/curator
   specs:
     curator (0.1.0)
       aasm (~> 5.1)
@@ -98,6 +97,14 @@ GEM
       activerecord (>= 4.2)
     attr_json (1.3.0)
       activerecord (>= 5.0.0, < 6.2)
+    azure-storage-blob (2.0.1)
+      azure-storage-common (~> 2.0)
+      nokogiri (~> 1.11.0.rc2)
+    azure-storage-common (2.0.2)
+      faraday (~> 1.0)
+      faraday_middleware (~> 1.0.0.rc1)
+      net-http-persistent (~> 4.0)
+      nokogiri (~> 1.11.0.rc2)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -132,6 +139,8 @@ GEM
     faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
+    faraday_middleware (1.0.0)
+      faraday (~> 1.0)
     ffi (1.15.0)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
@@ -177,6 +186,8 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multipart-post (2.1.1)
+    net-http-persistent (4.0.1)
+      connection_pool (~> 2.2)
     nio4r (2.5.7)
     nokogiri (1.11.3)
       mini_portile2 (~> 2.5.0)
@@ -288,6 +299,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  azure-storage-blob (>= 1.1)
   bootsnap (>= 1.4.4)
   byebug
   connection_pool (~> 2.2.5)
@@ -311,4 +323,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.17
+   2.2.18

@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '~> 2.6'
 
-gem 'curator', github: 'boston-library/curator'
+# gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1', '< 6.2'
 # Use Puma as the app server
@@ -12,6 +12,7 @@ gem 'puma', '~> 5.3'
 gem 'oj', '~> 3.11'
 gem 'sidekiq', '~> 6.2'
 gem 'connection_pool', '~> 2.2.5'
+gem 'azure-storage-blob', '>= 1.1', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
