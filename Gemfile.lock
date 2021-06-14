@@ -1,5 +1,6 @@
-PATH
-  remote: /home/bbarber/curator
+GIT
+  remote: https://github.com/boston-library/curator.git
+  revision: 4aaee8479791131c928a909732b01266eb2c4023
   specs:
     curator (0.1.0)
       aasm (~> 5.1)
