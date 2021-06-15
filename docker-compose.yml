@@ -1,0 +1,75 @@
+version: "3"
+services:
+  pg:
+    container_name: curator_app_postgres
+    image: postgres:12
+    volumes:
+      - pg_curator_app_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+  cache:
+    container_name: curator_app_shared_cache
+    image: redis:latest
+    command: ['redis-server', '--databases', '3', '--maxmemory', '32mb', '--maxmemory-policy', 'allkeys-lfu']
+    sysctls:
+      net.core.somaxconn: 1024
+  sidekiq_redis:
+    container_name: curator_sidekiq_redis
+    image: redis:latest
+    command: redis-server --bind 0.0.0.0 --databases 1  --maxmemory 256mb --maxmemory-policy noeviction --appendonly yes --dir /data
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_sidekiq_data:/data
+    sysctls:
+      net.core.somaxconn: 1024
+  azure:
+    container_name: curator_app_azure
+    image: mcr.microsoft.com/azure-storage/azurite:3.11.0
+    command: "azurite-blob --blobHost 0.0.0.0 --blobPort 8888 -l /var/lib/azurite/data -d /opt/azurite/debug.log --loose --skipApiVersionCheck"
+    restart: always
+    volumes:
+      - az_curator_app_data:/var/lib/azurite/data
+    ports:
+      - "8888:8888"
+  bpldc_authority_api:
+    container_name: curator_app_bpldc_authority_api
+    image: bostonlibrary/bpldc_authority_api:dev-latest
+    entrypoint: /bpldc_authority_entry.sh
+    command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+    volumes:
+      - ./docker/bpldc_authority_entry.sh:/bpldc_authority_entry.sh
+    environment:
+      - RAILS_ENV=development
+      - WEB_CONCURRENCY=0
+      - RAILS_LOG_TO_STDOUT=true
+      - POSTGRES_HOST=pg
+      - BPLDC_REDIS_CACHE_URL=redis://cache:6379/1
+    ports:
+      - "3001:3000"
+    depends_on:
+      - pg
+      - cache
+  ark_manager:
+    container_name: curator_app_ark_manager
+    image: bostonlibrary/ark-manager:dev-latest
+    entrypoint: /ark_manager_entry.sh
+    command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
+    volumes:
+      - ./docker/ark_manager_entry.sh:/ark_manager_entry.sh
+    ports:
+      - "3002:3000"
+    env_file: .env
+    environment:
+      - RAILS_ENV=development
+      - RAILS_LOG_TO_STDOUT=true
+      - WEB_CONCURRENCY=0
+      - ARK_MANAGER_DATABASE_HOST=pg
+      - ARK_MANAGER_REDIS_CACHE_URL=redis://cache:6379/0
+    depends_on:
+      - pg
+      - cache
+volumes:
+  az_curator_app_data:
+  pg_curator_app_data:
+  redis_sidekiq_data:

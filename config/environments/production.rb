@@ -45,12 +45,17 @@ Rails.application.configure do
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
 
-  # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store,
+                       {
+                         url: ENV.fetch('CURATOR_APP_REDIS_CACHE_URL') { Rails.application.credentials.dig(:redis, :cache_url) },
+                         pool_size: ENV.fetch('RAILS_MAX_THREADS') { 5 },
+                         pool_timeout: 5,
+                         expires_in: 24.hours
+                       }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter  = :sidekiq
-  config.active_job.queue_name_prefix = 'curator_app_production'
+  config.active_job.queue_name_prefix = 'curator_app'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
@@ -76,10 +81,16 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  else
+    shift_age = 'monthly'
+    shift_size = 64.megabytes
+    logger = ActiveSupport::Logger.new(config.paths['log'].first, shift_age, shift_size)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.

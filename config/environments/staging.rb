@@ -17,7 +17,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -49,12 +49,18 @@ Rails.application.configure do
   config.log_tags = [:request_id]
 
   # Use a different cache store in production.
-  # config.cache_store = :mem_cache_store
+  config.cache_store = :redis_cache_store,
+                       {
+                         url: ENV.fetch('CURATOR_APP_REDIS_CACHE_URL') { Rails.application.credentials.dig(:redis, :cache_url) },
+                         pool_size: ENV.fetch('RAILS_MAX_THREADS') { 5 },
+                         pool_timeout: 5,
+                         expires_in: 24.hours
+                       }
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :sidekiq
-  config.active_job.queue_name_prefix = "curator_app_staging"
-  
+  config.active_job.queue_name_prefix = "curator_app"
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -75,10 +81,16 @@ Rails.application.configure do
   # require "syslog/logger"
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  else
+    shift_age = 'monthly'
+    shift_size = 64.megabytes
+    logger = ActiveSupport::Logger.new(config.paths['log'].first, shift_age, shift_size)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.

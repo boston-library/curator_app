@@ -4,6 +4,6 @@ staging:
 production:
   :concurrency: 20
 :queues:
-  - filestream_derivatives
-  - indexing
-  - default
+  - curator_app_filestream_derivatives
+  - curator_app_indexing
+  - curator_app_default
