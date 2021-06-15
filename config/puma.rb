@@ -17,7 +17,7 @@ environment rails_env
 worker_timeout 3600 if rails_env == 'development'
 
 if %w(staging production).member?(rails_env)
-  bind "unix://#{app_dir}/tmp/pids/curator_api_puma.sock"
+  bind "unix://#{app_dir}/tmp/sockets/curator_api_puma.sock"
   stdout_redirect("#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true)
   pidfile "#{app_dir}/tmp/pids/curator_puma_server.pid"
   state_path "#{app_dir}/tmp/pids/curator_puma_server.state"
