@@ -24,6 +24,10 @@ module CuratorApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.api_only = true
+    # nil sets these to use the default queue
+    config.active_storage.queues.analysis   = nil       # defaults to "active_storage_analysis"
+    config.active_storage.queues.purge      = nil       # defaults to "active_storage_purge"
+    config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror
     if Rails.env.development?
       console do
         require 'pry' unless defined? Pry
