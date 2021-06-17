@@ -5,6 +5,10 @@ Curator.config do |config|
     config.ark_manager_api_url = Rails.application.credentials.dig(:ark_manager_api_url)
     config.authority_api_url = Rails.application.credentials.dig(:authority_api_url)
     config.solr_url = Rails.application.credentials.dig(:solr_url)
+    config.fedora_credentials = {
+      fedora_username: Rails.application.credentials.dig(:fedora, :username),
+      fedora_password: Rails.application.credentials.dig(:fedora, :password)
+    }
     config.default_ark_params = {
       namespace_ark: Rails.application.credentials.dig(:ark, :namespace_ark),
       namespace_id: Rails.application.credentials.dig(:ark, :namespace_id),
@@ -15,6 +19,10 @@ Curator.config do |config|
     config.ark_manager_api_url = ENV['ARK_MANAGER_API_URL']
     config.authority_api_url = ENV['AUTHORITY_API_URL']
     config.solr_url = ENV['CURATOR_SOLR_URL']
+    config.fedora_credentials = {
+      fedora_username: ENV['FEDORA_USERNAME'],
+      fedora_password: ENV['FEDORA_PASSWORD']
+    }
     config.default_ark_params = {
       namespace_ark: ENV['ARK_NAMESPACE'],
       namespace_id: ENV['ARK_MANAGER_DEFAULT_NAMESPACE'],
