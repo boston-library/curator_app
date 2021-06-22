@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 56c1d58e1c07065e5b3d3801eda2cabff51f7d38
+  revision: 905bf866fbb6e1fd6ad5cd5d20b0099d8ad2d61b
   specs:
     curator (0.1.0)
       aasm (~> 5.1)
@@ -275,11 +275,11 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     thor (1.1.0)
-    traject (3.5.0)
+    traject (3.6.0)
       concurrent-ruby (>= 0.8.0)
       dot-properties (>= 0.1.1)
       hashie (>= 3.1, < 5)
-      http (>= 3.0, < 5)
+      http (>= 3.0, < 6)
       httpclient (~> 2.5)
       marc (~> 1.0)
       marc-fastxmlwriter (~> 1.0)
