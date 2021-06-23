@@ -13,11 +13,16 @@ gem 'oj', '~> 3.11'
 gem 'sidekiq', '~> 6.2'
 gem 'connection_pool', '~> 2.2.5'
 gem 'azure-storage-blob', '>= 1.1', require: false
+gem 'faraday-http', '~> 1.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.2'
 gem 'rack-cors', '~> 1.1'
+
+# NOTE these are required for 'Analyze Jobs' for active storage
+gem 'image_processing', '~> 1.12'
+gem 'mini_magick', '~> 4.11'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -32,9 +37,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry', '0.14'
   gem 'awesome_print', '~> 1.9'
-  gem 'solr_wrapper', '>= 2.1', '< 3.0'
+  gem 'solr_wrapper', '~> 3.1'
   gem 'dotenv-rails', '~> 2.7'
-  gem 'factory_bot_rails', '~> 5.0'
+  gem 'factory_bot_rails', '~> 6.2'
 end
 
 group :development do

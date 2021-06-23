@@ -36,5 +36,14 @@ module CuratorApp
         config.console = Pry
       end
     end
+
+    overrides = "#{Rails.root}/app/overrides"
+    Rails.autoloaders.main.ignore(overrides)
+
+    config.to_prepare do
+      Dir.glob("#{overrides}/**/*_override.rb").each do |override|
+        Rails.configuration.cache_classes ? require(override) : load(override)
+      end
+    end
   end
 end
