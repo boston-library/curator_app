@@ -37,6 +37,10 @@ module CuratorApp
       end
     end
 
+    config.session_store :cache_store
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use config.session_store, config.session_options
+
     overrides = "#{Rails.root}/app/overrides"
     Rails.autoloaders.main.ignore(overrides)
 
