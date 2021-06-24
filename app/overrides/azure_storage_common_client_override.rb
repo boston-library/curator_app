@@ -4,9 +4,7 @@ require 'azure/storage/blob'
 
 
 # NOTE: this override is to prevent frequent Faraday::ConnectionFailed Connection Reset by peer error.
-# By removing the pool option of the the net_http_persistent adapter the default will specify a reccomended pool size based on your system.
-# https://github.com/drbrain/net-http-persistent/blob/75574f2546a08aa2663b06a2e005bcf2ee304f13/lib/net/http/persistent.rb#L166
-# This allows for more simultaneous connections than the hardcoded 5 in the gem.
+# This will use the now threadsafe typhoeus adapter. Based on this person's patch https://github.com/Azure/azure-storage-ruby/issues/169#issuecomment-803623748
 module AzureStorageCommonClientOverride
   private
 
@@ -28,10 +26,7 @@ module AzureStorageCommonClientOverride
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.adapter :net_http_persistent do |http|
-        # yields Net::HTTP::Persistent
-        http.idle_timeout = 120
-      end
+      conn.adapter :typhoeus
     end
   end
 end

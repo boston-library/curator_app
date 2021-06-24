@@ -13,7 +13,8 @@ gem 'oj', '~> 3.11'
 gem 'sidekiq', '~> 6.2'
 gem 'connection_pool', '~> 2.2.5'
 gem 'azure-storage-blob', '>= 1.1', require: false
-gem 'net-http-persistent', '>= 3.1'
+#gem 'net-http-persistent', '>= 3.1'
+gem 'typhoeus', '~> 1.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
