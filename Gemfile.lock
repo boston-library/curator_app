@@ -143,9 +143,6 @@ GEM
     faraday-em_http (1.0.0)
     faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
-    faraday-http (1.0.1)
-      faraday (~> 1.0)
-      http (~> 4.0)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
     faraday_middleware (1.0.0)
@@ -322,10 +319,10 @@ DEPENDENCIES
   curator!
   dotenv-rails (~> 2.7)
   factory_bot_rails (~> 6.2)
-  faraday-http (~> 1.0)
   image_processing (~> 1.12)
   listen (~> 3.3)
   mini_magick (~> 4.11)
+  net-http-persistent (>= 3.1)
   oj (~> 3.11)
   pg (>= 0.18, < 2.0)
   pry (= 0.14)
@@ -342,4 +339,4 @@ RUBY VERSION
    ruby 2.6.6p146
 
 BUNDLED WITH
-   2.2.20
+   2.2.21
