@@ -25,7 +25,10 @@ module AzureStorageCommonClientOverride
                     end || nil
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
-      conn.use FaradayMiddleware::FollowRedirects
+      conn.request :multipart
+      conn.request :url_encoded
+      conn.request :retry, max: 2
+      conn.response :follow_redirects
       conn.adapter :typhoeus
     end
   end
