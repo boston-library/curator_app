@@ -8,21 +8,34 @@ services:
     environment:
       - POSTGRES_PASSWORD=postgres
   cache:
+    mem_reservation: 256m
     container_name: curator_app_shared_cache
     image: redis:latest
-    command: ['redis-server', '--databases', '3', '--maxmemory', '32mb', '--maxmemory-policy', 'allkeys-lfu']
+    entrypoint: /redis_init.sh
+    privileged: true
+    command: redis-server --databases 3 --maxmemory 32mb --maxmemory-policy allkeys-lfu
+    volumes:
+      - ./docker/redis_init.sh:/redis_init.sh
+    ulimits:
+      nproc: 65535
     sysctls:
-      net.core.somaxconn: 1024
+      net.core.somaxconn: 4096
   sidekiq_redis:
+    mem_reservation: 512m
     container_name: curator_sidekiq_redis
     image: redis:latest
+    entrypoint: /redis_init.sh
+    privileged: true
     command: redis-server --bind 0.0.0.0 --databases 1  --maxmemory 256mb --maxmemory-policy noeviction --appendonly yes --dir /data
     ports:
       - "6380:6379"
     volumes:
       - redis_sidekiq_data:/data
+      - ./docker/redis_init.sh:/redis_init.sh
+    ulimits:
+      nproc: 65535
     sysctls:
-      net.core.somaxconn: 1024
+      net.core.somaxconn: 4096
   azure:
     container_name: curator_app_azure
     image: mcr.microsoft.com/azure-storage/azurite:3.13.1
@@ -33,6 +46,8 @@ services:
     ports:
       - "8888:8888"
   bpldc_authority_api:
+    cpu_count: 2
+    mem_reservation: 2048m
     container_name: curator_app_bpldc_authority_api
     image: bostonlibrary/bpldc_authority_api:dev-latest
     entrypoint: /bpldc_authority_entry.sh
@@ -41,7 +56,7 @@ services:
       - ./docker/bpldc_authority_entry.sh:/bpldc_authority_entry.sh
     environment:
       - RAILS_ENV=development
-      - WEB_CONCURRENCY=0
+      - WEB_CONCURRENCY=2
       - RAILS_LOG_TO_STDOUT=true
       - POSTGRES_HOST=pg
       - BPLDC_REDIS_CACHE_URL=redis://cache:6379/1
@@ -51,6 +66,8 @@ services:
       - pg
       - cache
   ark_manager:
+    cpu_count: 2
+    mem_reservation: 2048m
     container_name: curator_app_ark_manager
     image: bostonlibrary/ark-manager:dev-latest
     entrypoint: /ark_manager_entry.sh
@@ -63,7 +80,7 @@ services:
     environment:
       - RAILS_ENV=development
       - RAILS_LOG_TO_STDOUT=true
-      - WEB_CONCURRENCY=0
+      - WEB_CONCURRENCY=2
       - ARK_MANAGER_DATABASE_HOST=pg
       - ARK_MANAGER_REDIS_CACHE_URL=redis://cache:6379/0
     depends_on:

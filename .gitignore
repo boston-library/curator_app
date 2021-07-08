@@ -29,7 +29,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-
+scratch.rb
 .env
 .env.*
 # Ignore all RubyMine temp files
