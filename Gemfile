@@ -9,12 +9,14 @@ gem 'rails', '~> 6.1.4', '< 6.2'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.3'
-gem 'oj', '~> 3.11'
+gem 'oj', '~> 3.12'
 gem 'sidekiq', '~> 6.2'
-gem 'connection_pool', '~> 2.2.5'
+gem 'connection_pool', '~> 2.2'
+gem 'faraday', '~> 1.5'
+gem 'faraday_middleware','~> 1.0'
+gem 'net-http-persistent', '>= 3.1'
 gem 'azure-storage-blob', '>= 1.1', require: false
-#gem 'net-http-persistent', '>= 3.1'
-gem 'typhoeus', '~> 1.4'
+# gem 'typhoeus', '~> 1.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -39,7 +41,7 @@ group :development, :test do
   gem 'pry', '0.14'
   gem 'awesome_print', '~> 1.9'
   gem 'solr_wrapper', '~> 3.1'
-  gem 'dotenv-rails', '~> 2.7'
+  gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
   gem 'factory_bot_rails', '~> 6.2'
 end
 

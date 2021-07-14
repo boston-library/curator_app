@@ -2,7 +2,6 @@
 
 require 'azure/storage/blob'
 
-
 # NOTE: this override is to prevent frequent Faraday::ConnectionFailed Connection Reset by peer error.
 # This will use the now threadsafe typhoeus adapter. Based on this person's patch https://github.com/Azure/azure-storage-ruby/issues/169#issuecomment-803623748
 module AzureStorageCommonClientOverride
@@ -25,11 +24,15 @@ module AzureStorageCommonClientOverride
                     end || nil
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
+      conn.use FaradayMiddleware::FollowRedirects
+      conn.use FaradayMiddleware::Gzip
       conn.request :multipart
       conn.request :url_encoded
-      conn.request :retry, max: 2
-      conn.response :follow_redirects
-      conn.adapter :typhoeus
+      conn.request :retry, max: 2, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
+      conn.adapter :net_http_persistent, pool_size: 16 do |http|
+        # yields Net::HTTP::Persistent
+        http.idle_timeout = 100
+      end
     end
   end
 end
