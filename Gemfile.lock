@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 9e74fb429989dafc0702726bf08f030ea5f50ed0
+  revision: 3cf4571769ea878e6e4887543f5f6512a969500a
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -346,4 +346,4 @@ RUBY VERSION
    ruby 2.6.8p205
 
 BUNDLED WITH
-   2.2.23
+   2.2.24

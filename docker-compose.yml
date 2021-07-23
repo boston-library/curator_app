@@ -17,7 +17,7 @@ services:
     volumes:
       - ./docker/redis_init.sh:/redis_init.sh
     ulimits:
-      nproc: 65535
+      nproc: 16384
     sysctls:
       net.core.somaxconn: 4096
   sidekiq_redis:
@@ -33,7 +33,7 @@ services:
       - redis_sidekiq_data:/data
       - ./docker/redis_init.sh:/redis_init.sh
     ulimits:
-      nproc: 65535
+      nproc: 16384
     sysctls:
       net.core.somaxconn: 4096
   azure:
