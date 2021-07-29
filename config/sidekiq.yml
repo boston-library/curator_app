@@ -2,7 +2,7 @@
 staging:
   :concurrency: 5
 production:
-  :concurrency: 20
+  :concurrency: 10
 :queues:
   - curator_app_indexing
   - curator_app_arks
