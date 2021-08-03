@@ -25,7 +25,6 @@ module AzureStorageCommonClientOverride
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.use FaradayMiddleware::Gzip
       conn.request :multipart
       conn.request :url_encoded
       conn.request :retry, max: 2, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
