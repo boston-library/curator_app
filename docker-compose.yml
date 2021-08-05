@@ -73,6 +73,7 @@ services:
     entrypoint: /ark_manager_entry.sh
     command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
     volumes:
+      - ./ark-manager_export_DEV_2021-05-10.csv:/ark-manager_export_DEV_2021-05-10.csv
       - ./docker/ark_manager_entry.sh:/ark_manager_entry.sh
     ports:
       - "3002:3000"

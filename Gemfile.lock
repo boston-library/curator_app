@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: b9e3f69cbf7d1ccd6ca177fc646104a536d1566a
+  revision: b86c13a47adae6387c448a8c4030ede64e716bf0
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -74,7 +74,7 @@ GEM
     activerecord (6.1.4)
       activemodel (= 6.1.4)
       activesupport (= 6.1.4)
-    activerecord-postgres_enum (1.6.0)
+    activerecord-postgres_enum (1.6.1)
       activerecord (>= 5, < 6.2)
       pg
     activestorage (6.1.4)
@@ -124,8 +124,8 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    down (5.2.2)
-      addressable (~> 2.5)
+    down (5.2.3)
+      addressable (~> 2.8)
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
