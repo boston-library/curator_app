@@ -24,9 +24,13 @@ nakayoshi_fork
 
 # Best Practice is to reconnect any Non Active Record Connections on boot in clustered mode
 on_worker_boot do
-  Rails.cache.redis.reload(&:quit) if Rails.cache.respond_to?(:redis)
+  if defined?(Rails)
+    Rails.cache.redis.reload(&:quit) if Rails.cache.respond_to?(:redis)
+  end
 
-  Curator::Services::RemoteService.reload!
+  if defined?(Curator)
+    Curator::Services::RemoteService.reload!
+  end
 end
 
 if %w(staging production).member?(rails_env)
