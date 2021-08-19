@@ -54,6 +54,7 @@ services:
     command: ["bundle", "exec", "puma", "-C", "config/puma.rb"]
     volumes:
       - ./docker/bpldc_authority_entry.sh:/bpldc_authority_entry.sh
+    env_file: .env
     environment:
       - RAILS_ENV=development
       - WEB_CONCURRENCY=2

@@ -31,6 +31,7 @@ module AzureStorageCommonClientOverride
       conn.adapter :net_http_persistent, pool_size: 16 do |http|
         # yields Net::HTTP::Persistent
         http.idle_timeout = 100
+        http.read_timeout = 90
       end
     end
   end
