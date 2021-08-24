@@ -24,7 +24,7 @@ module Scripts
                   else
                     model_type.constantize
                   end
-      if ark_id.present?
+      if ark_id.present? && rec_class.to_s.match?(/Curator/)
         if rec_class.find_by_ark_id(ark_id)
           verified = true
         else
