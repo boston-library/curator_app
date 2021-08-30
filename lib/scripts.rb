@@ -25,13 +25,13 @@ module Scripts
                     model_type.constantize
                   end
       if ark_id.present? && rec_class.to_s.match?(/Curator/)
-        if rec_class.find_by_ark_id(ark_id)
+        if rec_class.find_by(ark_id: ark_id)
           verified = true
         else
           error = "Could not find #{rec_class.to_s} with ark id: #{ark_id}"
         end
       elsif parent_ark_id.present? && filename_base.present?
-        parent = Curator::DigitalObject.find_by_ark_id(parent_ark_id)
+        parent = Curator::DigitalObject.find_by(ark_id: parent_ark_id)
         if parent
           fs_query = if rec_class < Curator::Filestreams::FileSet
                        rec_class.where(file_set_of_id: parent.id, file_name_base: filename_base)
@@ -50,7 +50,12 @@ module Scripts
           else
             fs = fs_query.first
             if fs.public_send(attachment_type.to_sym).attached?
-              verified = true
+              blob = fs.public_send(attachment_type.to_sym).blob
+              if blob.service.exist?(blob.key)
+                verified = true
+              else
+                error = "Could not find #{attachment_type} blob in Azure for #{fs.class} with id: #{fs.id} and ark id: #{fs.ark_id}"
+              end
             else
               error = "Could not find attachment #{attachment_type} for #{fs.class} with id: #{fs.id} and ark id: #{fs.ark_id}"
             end
