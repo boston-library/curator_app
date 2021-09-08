@@ -30,11 +30,11 @@ module AzureStorageCommonClientOverride
       conn.use FaradayMiddleware::FollowRedirects
       conn.request :multipart
       conn.request :url_encoded
-      conn.request :retry, max: 2, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
+      conn.request :retry, max: 3, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
         # yields Net::HTTP::Persistent
-        http.idle_timeout = 100
-        http.read_timeout = 150
+        http.idle_timeout = 120
+        http.read_timeout = 180
       end
     end
   end

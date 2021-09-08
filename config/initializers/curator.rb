@@ -30,4 +30,16 @@ Curator.config do |config|
       url_base: ENV['ARK_MANAGER_DEFAULT_BASE_URL']
     }
   end
+
+  config.default_remote_service_timeout_opts = {
+    connect: 15,
+    read: 240,
+    write: 120,
+    keep_alive: 120
+  }
+
+  config.default_remote_service_pool_opts = {
+      size: ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 2,
+      timeout: 15
+  }
 end
