@@ -40,7 +40,7 @@ Rails.application.configure do
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :error
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   config.log_tags = [:request_id]
@@ -48,8 +48,8 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store,
                        {
                          url: ENV.fetch('CURATOR_APP_REDIS_CACHE_URL') { Rails.application.credentials.dig(:redis, :cache_url) },
-                         pool_size: ENV.fetch('RAILS_MAX_THREADS') { 5 },
-                         pool_timeout: 5,
+                         pool_size: ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 2,
+                         pool_timeout: 15,
                          expires_in: 24.hours
                        }
 
