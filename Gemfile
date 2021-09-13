@@ -22,6 +22,7 @@ gem 'azure-storage-blob', '>= 1.1', require: false
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.4'
 gem 'rack-cors', '~> 1.1'
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 
 # NOTE these are required for 'Analyze Jobs' for active storage
 gem 'image_processing', '~> 1.12'
@@ -31,9 +32,6 @@ gem 'mini_magick', '~> 4.11'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -49,6 +47,8 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'spring', '~> 2.1'
 end
+
+gem 'sd_notify', group: :production
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
