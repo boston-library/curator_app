@@ -275,7 +275,7 @@ GEM
     rubyzip (2.3.2)
     scrub_rb (1.0.1)
     sd_notify (0.1.1)
-    sidekiq (6.2.1)
+    sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
