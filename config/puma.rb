@@ -16,20 +16,36 @@ environment rails_env
 
 worker_timeout 3600 if rails_env == 'development'
 
+preload_app!
 # New feature that reduces latency https://github.com/puma/puma/blob/master/5.0-Upgrade.md#lower-latency-better-throughput
-wait_for_less_busy_worker
+wait_for_less_busy_worker 0.002
 
 # New feature that runs garbage collector when forking workers https://github.com/puma/puma/blob/master/5.0-Upgrade.md#nakayoshi_fork
 nakayoshi_fork
 
+on_restart do
+   puts "Refreshing Gemfile at #{app_dir}/Gemfile"
+   ENV["BUNDLE_GEMFILE"] = "#{app_dir}/Gemfile"
+end
+
 # Best Practice is to reconnect any Non Active Record Connections on boot in clustered mode
 on_worker_boot do
-  if defined?(Rails)
-    Rails.cache.redis.reload(&:quit) if Rails.cache.respond_to?(:redis)
+  puts 'Extablishing Active Record Connection...'
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
   end
 
   if defined?(Curator)
+    puts 'Reloading Remote Service Connection Pools...'
     Curator::Services::RemoteService.reload!
+  end
+end
+
+before_fork do
+  ActiveRecord::Base.connection_pool.disconnect!
+
+  if defined?(Curator)
+    Curator::Services::RemoteService.clear!
   end
 end
 
@@ -38,7 +54,7 @@ if %w(staging production).member?(rails_env)
   stdout_redirect("#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true)
   pidfile "#{app_dir}/tmp/pids/curator_puma_server.pid"
   state_path "#{app_dir}/tmp/pids/curator_puma_server.state"
-  activate_control_app
+  activate_control_app "#{app_dir}/tmp/sockets/curator_pumactl.sock"
 else
   port 3000
   stdout_redirect('/dev/stdout', '/dev/stderr')

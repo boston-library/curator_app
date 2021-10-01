@@ -23,19 +23,20 @@ module AzureStorageCommonClientOverride
                       URI::parse(ENV["HTTPS_PROXY"])
                     end || nil
 
-    pool_size = ENV.fetch('RAILS_MAX_THREADS') { 16 }.to_i * 2
-    pool_size = 16 if pool_size < 16
-
-    Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
+    # pool_size = ENV.fetch('RAILS_MAX_THREADS') { 16 }.to_i * 2
+    # pool_size = 16 if pool_size < 16
+    request_options = { read_timeout: 240, write_timeout: 240, open_timeout: 15 }
+    Faraday.new(uri, ssl: ssl_options, proxy: proxy_options, request: request_options ) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
       conn.request :multipart
       conn.request :url_encoded
       conn.request :retry, max: 3, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
-      conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-        # yields Net::HTTP::Persistent
-        http.idle_timeout = 120
-        http.read_timeout = 180
-      end
+      conn.adapter :excon, persistent: true, thread_safe_sockets: true
+      # conn.adapter :net_http_persistent, pool_size: pool_size do |http|
+      #   # yields Net::HTTP::Persistent
+      #   http.idle_timeout = 120
+      #   http.read_timeout = 180
+      # end
     end
   end
 end
