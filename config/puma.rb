@@ -54,7 +54,7 @@ if %w(staging production).member?(rails_env)
   stdout_redirect("#{app_dir}/log/puma.stdout.log", "#{app_dir}/log/puma.stderr.log", true)
   pidfile "#{app_dir}/tmp/pids/curator_puma_server.pid"
   state_path "#{app_dir}/tmp/pids/curator_puma_server.state"
-  activate_control_app "#{app_dir}/tmp/sockets/curator_pumactl.sock"
+  activate_control_app "unix://#{app_dir}/tmp/sockets/curator_pumactl.sock"
 else
   port 3000
   stdout_redirect('/dev/stdout', '/dev/stderr')
