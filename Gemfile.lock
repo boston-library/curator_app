@@ -128,7 +128,6 @@ GEM
     down (5.2.4)
       addressable (~> 2.8)
     erubi (1.10.0)
-    excon (0.86.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
@@ -328,9 +327,8 @@ DEPENDENCIES
   connection_pool (~> 2.2)
   curator!
   dotenv-rails (~> 2.7)
-  excon (>= 0.27.4)
   factory_bot_rails (~> 6.2)
-  faraday (~> 1.7)
+  faraday (~> 1.8)
   faraday_middleware (~> 1.0)
   image_processing (~> 1.12)
   listen (~> 3.3)

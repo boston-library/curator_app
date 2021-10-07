@@ -3,8 +3,32 @@
 require 'azure/storage/blob'
 
 # NOTE: this override is to prevent frequent Faraday::ConnectionFailed Connection Reset by peer error.
-# This will use the now threadsafe typhoeus adapter. Based on this person's patch https://github.com/Azure/azure-storage-ruby/issues/169#issuecomment-803623748
+# Increased pool size. made agents a threadsafe hash instead of a base one. removed redundant reuse_agent! method in favor of
+# perfomring operation in agents method. Try Using clear method  first instead of just setting agents instance variable to nil.
 module AzureStorageCommonClientOverride
+  def agents(uri)
+    uri = URI(uri) unless uri.is_a? URI
+    key = uri.host
+
+    @agents ||= Concurrent::Hash.new
+    if @agents[key].present?
+      @agents[key].params.clear
+      @agents[key].headers.clear
+    else
+      @agents[key] = build_http(uri)
+    end
+    @agents[key]
+  end
+
+  # Empties all the http agents
+  def reset_agents!
+    if @agents.respond_to?(:clear)
+      @agents.clear
+    else
+      @agents = nil
+    end
+  end
+
   private
 
   def build_http(uri)
@@ -23,20 +47,19 @@ module AzureStorageCommonClientOverride
                       URI::parse(ENV["HTTPS_PROXY"])
                     end || nil
 
-    # pool_size = ENV.fetch('RAILS_MAX_THREADS') { 16 }.to_i * 2
-    # pool_size = 16 if pool_size < 16
-    request_options = { read_timeout: 240, write_timeout: 240, open_timeout: 15 }
-    Faraday.new(uri, ssl: ssl_options, proxy: proxy_options, request: request_options ) do |conn|
+    pool_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i * 2
+    pool_size = 10 if pool_size < 10
+    # request_options = { read_timeout: 240, write_timeout: 240, open_timeout: 15 }
+    Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.request :multipart
-      conn.request :url_encoded
-      conn.request :retry, max: 3, exceptions: [Errno::ECONNRESET, Faraday::ConnectionFailed,  Errno::ETIMEDOUT, Faraday::TimeoutError, Faraday::RetriableResponse]
-      conn.adapter :excon, persistent: true, thread_safe_sockets: true
-      # conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-      #   # yields Net::HTTP::Persistent
-      #   http.idle_timeout = 120
-      #   http.read_timeout = 180
-      # end
+      conn.use Faraday::Request::Multipart
+      conn.use Faraday::Request::UrlEncoded
+      conn.adapter :net_http_persistent, pool_size: pool_size do |http|
+        http.idle_timeout = 120
+        http.read_timeout = 240
+        http.write_timeout = 240
+        http.open_timeout = 15
+      end
     end
   end
 end

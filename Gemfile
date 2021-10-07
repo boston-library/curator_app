@@ -12,10 +12,9 @@ gem 'puma', '~> 5.4'
 gem 'oj', '~> 3.13'
 gem 'sidekiq', '~> 6.2'
 gem 'connection_pool', '~> 2.2'
-gem 'faraday', '~> 1.7'
+gem 'faraday', '~> 1.8'
 gem 'faraday_middleware','~> 1.0'
 gem 'net-http-persistent', '>= 3.1'
-gem 'excon', '>= 0.27.4'
 gem 'azure-storage-blob', '>= 1.1', require: false
 # gem 'typhoeus', '~> 1.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
