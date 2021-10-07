@@ -47,7 +47,8 @@ module AzureStorageCommonClientOverride
                       URI::parse(ENV["HTTPS_PROXY"])
                     end || nil
 
-    pool_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i * 2
+    total_workers = ENV.fetch('WEB_CONCURRENCY') { 2 }.to_i
+    pool_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i * total_workers
     pool_size = 10 if pool_size < 10
     # request_options = { read_timeout: 240, write_timeout: 240, open_timeout: 15 }
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
