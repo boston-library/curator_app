@@ -7,16 +7,19 @@ require 'azure/storage/blob'
 # perfomring operation in agents method. Try Using clear method  first instead of just setting agents instance variable to nil.
 module AzureStorageCommonClientOverride
   def agents(uri)
+    @agents ||= Concurrent::Map.new
+
     uri = URI(uri) unless uri.is_a? URI
     key = uri.host
 
-    @agents ||= Concurrent::Hash.new
-    if @agents[key].present?
-      @agents[key].params.clear
-      @agents[key].headers.clear
-    else
-      @agents[key] = build_http(uri)
+    @agents.compute_if_absent(key) { build_http(uri) }
+
+    @agents.compute_if_present(key) do |agent|
+      agent.params.clear
+      agent.headers.clear
+      agent
     end
+
     @agents[key]
   end
 
@@ -48,18 +51,16 @@ module AzureStorageCommonClientOverride
                     end || nil
 
     total_workers = ENV.fetch('WEB_CONCURRENCY') { 2 }.to_i
-    pool_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i * total_workers
-    pool_size = 10 if pool_size < 10
-    # request_options = { read_timeout: 240, write_timeout: 240, open_timeout: 15 }
+    thread_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 1 # Add an offset so the pool won't get full
+    pool_size = thread_size * total_workers
+    pool_size = 12 if pool_size < 12
+
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.use Faraday::Request::Multipart
       conn.use Faraday::Request::UrlEncoded
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-        http.idle_timeout = 120
+        http.idle_timeout = 100
         http.read_timeout = 240
-        http.write_timeout = 240
-        http.open_timeout = 15
       end
     end
   end
