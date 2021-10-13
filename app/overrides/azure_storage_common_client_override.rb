@@ -59,8 +59,11 @@ module AzureStorageCommonClientOverride
       conn.use FaradayMiddleware::FollowRedirects
       conn.use Faraday::Request::UrlEncoded
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-        http.idle_timeout = 100
-        http.read_timeout = 240
+        http.idle_timeout = 120
+        http.read_timeout = 300
+        http.max_requests = 96
+        http.max_retries = 3
+        http.socket_options << [Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, 1]
       end
     end
   end
