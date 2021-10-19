@@ -54,15 +54,12 @@ module AzureStorageCommonClientOverride
     thread_size = ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 1 # Add an offset so the pool won't get full
     pool_size = thread_size * total_workers
     pool_size = 12 if pool_size < 12
-
+    pool_size = pool_size * 2
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
       conn.use Faraday::Request::UrlEncoded
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-        http.idle_timeout = 300
-        http.read_timeout = 540
-        http.max_retries = 5
-        http.socket_options << [Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, 1]
+        http.idle_timeout = 100
       end
     end
   end
