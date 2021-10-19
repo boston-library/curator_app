@@ -60,6 +60,8 @@ module AzureStorageCommonClientOverride
       conn.use Faraday::Request::UrlEncoded
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
         http.idle_timeout = 100
+        http.read_timeout = 540
+        http.max_retries = 5
       end
     end
   end
