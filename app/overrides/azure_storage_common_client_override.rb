@@ -61,6 +61,7 @@ module AzureStorageCommonClientOverride
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
         http.idle_timeout = 300
         http.read_timeout = 540
+        http.max_retries = 5
         http.socket_options << [Socket::SOL_SOCKET, Socket::SO_KEEPALIVE, 1]
       end
     end
