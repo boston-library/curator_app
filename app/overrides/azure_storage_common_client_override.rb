@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'azure/storage/blob'
-
+# require 'typhoeus/adapters/faraday'
 # NOTE: this override is to prevent frequent Faraday::ConnectionFailed Connection Reset by peer error.
 # Increased pool size. made agents a threadsafe hash instead of a base one. removed redundant reuse_agent! method in favor of
 # perfomring operation in agents method. Try Using clear method  first instead of just setting agents instance variable to nil.
@@ -50,14 +50,20 @@ module AzureStorageCommonClientOverride
                       URI::parse(ENV["HTTPS_PROXY"])
                     end || nil
 
-    pool_size = Process.const_defined?(:RLIMIT_NOFILE) ? (Process.getrlimit(Process::RLIMIT_NOFILE).first / 4).to_i : 256
+    # pool_size = Process.const_defined?(:RLIMIT_NOFILE) ? (Process.getrlimit(Process::RLIMIT_NOFILE).first / 4).to_i : 256
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-        http.idle_timeout = 100
-        http.read_timeout = 540
+
+      conn.response :logger, Rails.logger do |rails_logger|
+        rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
       end
+      conn.adapter :typhoeus, forbid_reuse: true, maxredirs: 3
+      # conn.adapter :net_http_persistent, pool_size: pool_size do |http|
+      #   http.idle_timeout = 100
+      #   http.keep_alive = 100
+      #   http.read_timeout = 540
+      # end
     end
   end
 end
