@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: ba6efdca5a1153d16d3f01d987961cd895a70e56
+  revision: 06465234eb3c426fb8d45c3fa06212479421e531
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -74,8 +74,8 @@ GEM
     activerecord (6.1.4.1)
       activemodel (= 6.1.4.1)
       activesupport (= 6.1.4.1)
-    activerecord-postgres_enum (1.6.1)
-      activerecord (>= 5, < 6.2)
+    activerecord-postgres_enum (1.7.0)
+      activerecord (>= 5)
       pg
     activestorage (6.1.4.1)
       actionpack (= 6.1.4.1)
