@@ -195,7 +195,7 @@ module Scripts
         verified = false
         error = ''
         begin
-          model_type, ark_id, attachment_type, parent_ark_id, file_name_base = export_row
+          model_type, ark_id, attachment_type, parent_ark_id, filename_base = export_row
           rec_class = record_class(model_type)
 
           if rec_class.to_s.match?(/Curator/) && ark_id.present?
