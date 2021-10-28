@@ -5,7 +5,7 @@ require 'csv'
 module Scripts
   # verify data migrated from Commonwealth/Fedora
   # @param path_to_manifest_csv [String] full path to export manifest
-  def self.verify_migration(path_to_manifest_csv)
+  def self.verify_migration_old(path_to_manifest_csv)
     puts "Starting verification from CSV: #{path_to_manifest_csv}"
     verify_output = []
     all_verified = []
@@ -83,7 +83,7 @@ module Scripts
     end
   end
 
-  def self.verify_migration_new(path_to_manifest_csv)
+  def self.verify_migration(path_to_manifest_csv)
     puts "Starting verification from CSV: #{path_to_manifest_csv}"
     VerifyMigration.new(path_to_manifest_csv).verify!
   end
