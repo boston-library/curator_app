@@ -174,7 +174,7 @@ module Scripts
 
     def verify!
       with_single_database_connection do
-        export_data[1..(export_data.count - 1)].each(&export_row)
+        export_data[1..(export_data.count - 1)].each(&verify_row)
       end
 
       if all_verified.include?(false)
