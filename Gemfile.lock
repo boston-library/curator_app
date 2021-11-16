@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 06465234eb3c426fb8d45c3fa06212479421e531
+  revision: 75bcc62ac9ad7b589ef1a6dbecf98fb10ec6c00c
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -197,9 +197,9 @@ GEM
       marc (~> 1.0)
     marcel (1.0.2)
     method_source (1.0.0)
-    mime-types (3.3.1)
+    mime-types (3.4.0)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2021.0901)
+    mime-types-data (3.2021.1115)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
     mini_portile2 (2.5.3)
@@ -213,7 +213,7 @@ GEM
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
     oj (3.13.9)
-    ox (2.14.5)
+    ox (2.14.6)
     paper_trail (11.1.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
