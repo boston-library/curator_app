@@ -203,7 +203,7 @@ module Scripts
             next
           elsif parent_ark_id.present? && filename_base.present?
             parent = find_parent_record!(parent_ark_id)
-            fs_query = file_set_query(rec_class, parent, filename_base)
+            fs_query = file_set_query(rec_class, ark_id, parent, filename_base)
 
             raise FileSetQueryBlank.new(rec_class, parent_ark_id, filename_base) if fs_query.blank?
 
@@ -259,7 +259,9 @@ module Scripts
       raise ParentRecordNotFound.new(e.rec_class, e.ark_id)
     end
 
-    def file_set_query(rec_class, parent, filename_base)
+    def file_set_query(rec_class, ark_id, parent, filename_base)
+      return Curator::Filestreams::FileSet.where(ark_id: ark_id) if ark_id.present?
+
       return rec_class.where(file_set_of_id: parent.id, file_name_base: filename_base) if rec_class < Curator::Filestreams::FileSet
 
       Curator::Filestreams::FileSet.where(file_set_of_id: parent.id, file_name_base: filename_base)
