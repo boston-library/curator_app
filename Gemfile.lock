@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 75bcc62ac9ad7b589ef1a6dbecf98fb10ec6c00c
+  revision: 8bc892156ededb8c4308ca7861dd64998e993a8c
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
-      activerecord-postgres_enum (~> 1.6)
+      activerecord-postgres_enum (~> 1.7)
       acts_as_list (~> 1.0)
       addressable (>= 2.8.0)
       after_commit_everywhere (~> 1.1)
@@ -197,7 +197,7 @@ GEM
       marc (~> 1.0)
     marcel (1.0.2)
     method_source (1.0.0)
-    mime-types (3.4.0)
+    mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.1115)
     mini_magick (4.11.0)
@@ -267,7 +267,7 @@ GEM
       rack (>= 1.4)
     retriable (3.1.2)
     rexml (3.2.5)
-    rsolr (2.3.0)
+    rsolr (2.4.0)
       builder (>= 2.1.2)
       faraday (>= 0.9.0)
     ruby-progressbar (1.11.0)
@@ -356,4 +356,4 @@ RUBY VERSION
    ruby 2.6.8p205
 
 BUNDLED WITH
-   2.2.27
+   2.2.32
