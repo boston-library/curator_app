@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '~> 2.6'
 
 gem 'curator', github: 'boston-library/curator'
-gem 'attr_json', '~> 1.3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '< 6.2'
 # Use Puma as the app server
