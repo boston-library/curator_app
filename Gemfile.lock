@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: a2feed0ec36d384448e83277063d61d3fa0559f3
+  revision: fdafcb3e51e8603038ce398f895cbe0e7f629916
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -267,7 +267,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.5.1)
-    request_store (1.5.0)
+    request_store (1.5.1)
       rack (>= 1.4)
     retriable (3.1.2)
     rexml (3.2.5)
