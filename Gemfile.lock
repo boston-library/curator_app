@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 6a455cc13caae478c2448a55d5528ca99dcc5402
+  revision: dfdd5b318a1fc4e09c7ce07d7a1e651cf1467c20
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -167,7 +167,7 @@ GEM
       rake
     globalid (1.0.0)
       activesupport (>= 5.0)
-    hashie (4.1.0)
+    hashie (5.0.0)
     htmlentities (4.3.4)
     http (5.0.4)
       addressable (~> 2.8)
@@ -218,7 +218,7 @@ GEM
       mini_portile2 (~> 2.7.0)
       racc (~> 1.4)
     oj (3.13.11)
-    ox (2.14.6)
+    ox (2.14.8)
     paper_trail (11.1.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -301,10 +301,10 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.1)
-    traject (3.6.0)
+    traject (3.7.0)
       concurrent-ruby (>= 0.8.0)
       dot-properties (>= 0.1.1)
-      hashie (>= 3.1, < 5)
+      hashie (>= 3.1, < 6)
       http (>= 3.0, < 6)
       httpclient (~> 2.5)
       marc (~> 1.0)
