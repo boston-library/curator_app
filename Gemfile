@@ -8,19 +8,19 @@ gem 'curator', github: 'boston-library/curator'
 gem 'rails', '~> 6.1.4', '< 6.2'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.4'
+gem 'puma', '~> 5.6'
 gem 'oj', '~> 3.13'
 gem 'sidekiq', '~> 6.2'
 gem 'connection_pool', '~> 2.2'
-gem 'faraday', '~> 1.8'
+gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
 gem 'net-http-persistent', '>= 3.1'
 gem 'typhoeus', '~> 1.4'
-gem 'azure-storage-blob', '>= 1.1', require: false
+gem 'azure-storage-blob', '>= 2', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.4'
+gem 'redis', '~> 4.6'
 gem 'rack-cors', '~> 1.1'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 
