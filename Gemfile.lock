@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: caed779be1d732b455b63f8fb82a498afa5f6238
+  revision: 9fcacdeb9520dabc03a93f12fba9ab709fc61288
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -267,7 +267,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.5.1)
+    redis (4.6.0)
     request_store (1.5.1)
       rack (>= 1.4)
     retriable (3.1.2)
@@ -282,7 +282,7 @@ GEM
     rubyzip (2.3.2)
     scrub_rb (1.0.1)
     sd_notify (0.1.1)
-    sidekiq (6.3.1)
+    sidekiq (6.4.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
@@ -349,9 +349,9 @@ DEPENDENCIES
   puma (~> 5.6)
   rack-cors (~> 1.1)
   rails (~> 6.1.4, < 6.2)
-  redis (~> 4.4)
+  redis (~> 4.6)
   sd_notify
-  sidekiq (~> 6.2)
+  sidekiq (~> 6.4)
   solr_wrapper (~> 3.1)
   spring (~> 2.1)
   typhoeus (~> 1.4)
