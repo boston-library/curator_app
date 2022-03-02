@@ -36,7 +36,7 @@ Curator.config do |config|
   end
 
   config.default_remote_service_timeout_opts = {
-    connect: 15,
+    connect: 120,
     read: 600,
     write: 120,
     keep_alive: 120
