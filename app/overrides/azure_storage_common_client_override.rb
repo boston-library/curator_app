@@ -52,18 +52,18 @@ module AzureStorageCommonClientOverride
 
     # pool_size = Process.const_defined?(:RLIMIT_NOFILE) ? (Process.getrlimit(Process::RLIMIT_NOFILE).first / 4).to_i : 256
 
+    pool_size = ENV.fetch('RAILS_MAX_THREADS', 5)
+
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-
-      # conn.response :logger, Rails.logger do |rails_logger|
-      #   rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
-      # end
-      conn.adapter :typhoeus, forbid_reuse: true, maxredirs: 3
-      # conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-      #   http.idle_timeout = 100
-      #   http.keep_alive = 100
-      #   http.read_timeout = 540
-      # end
+      conn.response :logger, Rails.logger do |rails_logger|
+        rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
+      end
+      # conn.adapter :typhoeus, forbid_reuse: true, maxredirs: 3
+      conn.adapter :net_http_persistent, pool_size: pool_size do |http|
+        http.idle_timeout = 120
+        http.keep_alive = 120
+      end
     end
   end
 end

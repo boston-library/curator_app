@@ -14,8 +14,8 @@ gem 'sidekiq', '~> 6.4'
 gem 'connection_pool', '~> 2.2'
 gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
-gem 'net-http-persistent', '>= 3.1'
-gem 'typhoeus', '~> 1.4'
+gem 'net-http-persistent', '>= 4'
+# gem 'typhoeus', '~> 1.4'
 gem 'azure-storage-blob', '>= 2', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
