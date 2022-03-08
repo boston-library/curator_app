@@ -56,13 +56,12 @@ module AzureStorageCommonClientOverride
 
     Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
       conn.use FaradayMiddleware::FollowRedirects
-      conn.response :logger, Rails.logger do |rails_logger|
-        rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
-      end
+      # conn.response :logger, Rails.logger do |rails_logger|
+      #   rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
+      # end
       # conn.adapter :typhoeus, forbid_reuse: true, maxredirs: 3
       conn.adapter :net_http_persistent, pool_size: pool_size do |http|
         http.idle_timeout = 120
-        http.keep_alive = 120
       end
     end
   end
