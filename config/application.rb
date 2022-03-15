@@ -24,32 +24,16 @@ module CuratorApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.api_only = true
+    config.eager_load_paths += %W(#{config.root}/lib)
 
     config.action_dispatch.default_headers['X-Frame-Options'] = 'DENY'
     # nil sets these to use the default queue
     config.active_storage.queues.analysis   = nil       # defaults to "active_storage_analysis"
     config.active_storage.queues.purge      = nil       # defaults to "active_storage_purge"
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror
-    if Rails.env.development?
-      console do
-        require 'pry' unless defined? Pry
-        require 'awesome_print'
-        AwesomePrint.pry!
-        config.console = Pry
-      end
-    end
 
     config.session_store :cookie_store, key: '_interslice_session'
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use config.session_store, config.session_options
-
-    overrides = "#{Rails.root}/app/overrides"
-    Rails.autoloaders.main.ignore(overrides)
-
-    config.to_prepare do
-      Dir.glob("#{overrides}/**/*_override.rb").each do |override|
-        Rails.configuration.cache_classes ? require(override) : load(override)
-      end
-    end
   end
 end

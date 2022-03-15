@@ -5,7 +5,7 @@ ruby '~> 2.6'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.4', '< 6.2'
+gem 'rails', '~> 6.1.4.7', '< 6.2'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.6'
@@ -37,6 +37,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry', '~> 0.13.1'
+  gem 'pry-rails'
   gem 'awesome_print', '~> 1.9'
   gem 'solr_wrapper', '~> 3.1'
   gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'

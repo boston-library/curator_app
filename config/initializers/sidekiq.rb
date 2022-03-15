@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 REDIS_SIDEKIQ_URL= ENV.fetch('CURATOR_APP_SIDEKIQ_REDIS_URL') { Rails.application.credentials.dig(:redis, :sidekiq_url) }
 
 Sidekiq.configure_client do |config|
