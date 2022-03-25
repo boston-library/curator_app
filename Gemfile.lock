@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 4b0dbe2e53a459fcf9318feba1fe2d6337dc4228
+  revision: e53ddf1a635073dd3449d002d4c4ed96d35caf91
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -126,7 +126,7 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
-    down (5.3.0)
+    down (5.3.1)
       addressable (~> 2.8)
     erubi (1.10.0)
     factory_bot (6.2.0)
