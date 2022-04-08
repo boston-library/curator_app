@@ -8,7 +8,7 @@ gem 'curator', github: 'boston-library/curator'
 gem 'rails', '~> 6.1.5', '< 6.2'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.6'
+gem 'puma', '~> 5.6.4'
 gem 'oj', '~> 3.13'
 gem 'sidekiq', '~> 6.4'
 gem 'connection_pool', '~> 2.2'
