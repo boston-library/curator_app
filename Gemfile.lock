@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: e53ddf1a635073dd3449d002d4c4ed96d35caf91
+  revision: ed4208b397976a575adf87dab59892515a1a5037
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -196,7 +196,7 @@ GEM
       rexml
       scrub_rb (>= 1.0.1, < 2)
       unf
-    marc-fastxmlwriter (1.0.0)
+    marc-fastxmlwriter (1.1.0)
       marc (~> 1.0)
     marcel (1.0.2)
     method_source (1.0.0)
