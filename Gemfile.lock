@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 91b526279dd1f6ab4c7056e0a52f0a4dfcd5a745
+  revision: a1a91bcb2b1487f10bb8a6a06b8ddcf2c26a18dd
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -96,7 +96,7 @@ GEM
       activerecord (>= 4.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
-    after_commit_everywhere (1.2.0)
+    after_commit_everywhere (1.2.2)
       activerecord (>= 4.2)
       activesupport
     alba (1.6.0)
