@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: d48d19fb252cd7be8c70489fee5892b727dfbcc9
+  revision: 09bef320fb4f95b4ae09389dda7463a8c8e04508
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -28,7 +28,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.2.0)
+    aasm (5.3.0)
       concurrent-ruby (~> 1.0)
     actioncable (6.1.6.1)
       actionpack (= 6.1.6.1)
