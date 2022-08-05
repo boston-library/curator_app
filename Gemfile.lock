@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 0953b601fa70987333e89605fb978ef5a1f3cfd0
+  revision: 298e7fc80fba4ad74e6aee256a10545a4ae7e2e7
   specs:
     curator (0.1.0)
       aasm (~> 5.2)
@@ -195,7 +195,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
-    marc (1.1.1)
+    marc (1.2.0)
       rexml
       scrub_rb (>= 1.0.1, < 2)
       unf
