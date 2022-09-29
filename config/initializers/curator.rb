@@ -6,6 +6,8 @@ Curator.config do |config|
     config.authority_api_url = Rails.application.credentials[:authority_api_url]
     config.solr_url = Rails.application.credentials[:solr_url]
     config.avi_processor_api_url = Rails.application.credentials[:avi_processor_api_url]
+    config.iiif_manifest_url = Rails.application.credentials.dig(:iiif, :manifest_url)
+    config.iiif_server_url = Rails.application.credentials.dig(:iiif, :server_url)
     config.ingest_source_directory = Rails.application.credentials[:ingest_source_directory]
     config.fedora_credentials = {
       fedora_username: Rails.application.credentials.dig(:fedora, :username),
@@ -17,16 +19,24 @@ Curator.config do |config|
       oai_namespace_id: Rails.application.credentials.dig(:ark, :oai_namespace_id),
       url_base: Rails.application.credentials.dig(:ark, :url_base)
     }
+    config.iiif_server_credentials = Rails.application.credentials.dig(:iiif, :credentials)
   else
     config.ark_manager_api_url = ENV['ARK_MANAGER_API_URL']
     config.authority_api_url = ENV['AUTHORITY_API_URL']
     config.solr_url = ENV['CURATOR_SOLR_URL']
     config.avi_processor_api_url = ENV['ARK_MANAGER_API_URL']
+    config.iiif_manifest_url = ENV['IIIF_MANIFEST_URL']
+    config.iiif_server_url = ENV['IIIF_SERVER_URL']
     config.ingest_source_directory = ENV['INGEST_SOURCE_DIRECTORY']
     config.fedora_credentials = {
       fedora_username: ENV['FEDORA_USERNAME'],
       fedora_password: ENV['FEDORA_PASSWORD']
     }
+    config.iiif_server_credentials = {
+      username: ENV['IIIF_SERVER_USER'],
+      secret: ENV['IIIF_SERVER_SECRET']
+    }
+
     config.default_ark_params = {
       namespace_ark: ENV['ARK_NAMESPACE'],
       namespace_id: ENV['ARK_MANAGER_DEFAULT_NAMESPACE'],

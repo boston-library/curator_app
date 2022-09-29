@@ -5,13 +5,13 @@ ruby '~> 2.6'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.6', '< 6.2'
+gem 'rails', '~> 6.1.7', '< 7'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.6.4'
+gem 'puma', '~> 5.6.5'
 gem 'oj', '~> 3.13'
-gem 'sidekiq', '~> 6.4'
-gem 'connection_pool', '~> 2.2'
+gem 'sidekiq', '~> 6.5'
+gem 'connection_pool', '~> 2.3'
 gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
 gem 'net-http-persistent', '>= 4'
@@ -39,8 +39,8 @@ group :development, :test do
   gem 'pry', '~> 0.13.1'
   gem 'pry-rails'
   gem 'awesome_print', '~> 1.9'
-  gem 'solr_wrapper', '~> 3.1'
-  gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
+  gem 'solr_wrapper', '~> 4'
+  gem 'dotenv-rails', '~> 2.8', require: 'dotenv/rails-now'
   gem 'factory_bot_rails', '~> 6.2'
 end
 
