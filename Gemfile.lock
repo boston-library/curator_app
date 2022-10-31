@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: a19b98506446f32b575edeaf331edbf7eefe6a92
+  revision: 38540a10a7ab704a8988c1d2ef2044bf4ecda8f2
   specs:
     curator (0.1.0)
       aasm (~> 5.3)
@@ -28,7 +28,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    aasm (5.3.1)
+    aasm (5.4.0)
       concurrent-ruby (~> 1.0)
     actioncable (6.1.7)
       actionpack (= 6.1.7)
@@ -96,7 +96,7 @@ GEM
       activerecord (>= 4.2)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    after_commit_everywhere (1.2.2)
+    after_commit_everywhere (1.3.0)
       activerecord (>= 4.2)
       activesupport
     alba (1.6.0)
@@ -289,7 +289,7 @@ GEM
       connection_pool (>= 2.2.5)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    slop (4.9.2)
+    slop (4.9.3)
     solr_wrapper (4.0.2)
       http
       minitar
@@ -362,4 +362,4 @@ RUBY VERSION
    ruby 2.6.10p210
 
 BUNDLED WITH
-   2.3.12
+   2.3.24
