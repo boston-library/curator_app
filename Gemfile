@@ -1,14 +1,14 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 2.6'
+ruby '~> 2.7'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.7', '< 7'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.6.5'
+gem 'puma', '~> 5.6.5', '< 6'
 gem 'oj', '~> 3.13'
 gem 'sidekiq', '~> 6.5'
 gem 'connection_pool', '~> 2.3'
