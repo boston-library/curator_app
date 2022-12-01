@@ -10,7 +10,7 @@ gem 'rails', '~> 6.1.7', '< 7'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.6.5', '< 6'
 gem 'oj', '~> 3.13'
-gem 'sidekiq', '~> 6.5'
+gem 'sidekiq', '~> 6.5', '< 7'
 gem 'connection_pool', '~> 2.3'
 gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
@@ -20,7 +20,7 @@ gem 'azure-storage-blob', '>= 2', require: false
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.6'
+gem 'redis', '~> 4.8', '< 5'
 gem 'rack-cors', '~> 1.1'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 
