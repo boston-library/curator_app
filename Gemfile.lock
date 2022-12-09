@@ -304,7 +304,7 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     thor (1.2.1)
-    traject (3.7.0)
+    traject (3.8.1)
       concurrent-ruby (>= 0.8.0)
       dot-properties (>= 0.1.1)
       hashie (>= 3.1, < 6)
