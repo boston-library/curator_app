@@ -5,7 +5,7 @@ ruby '~> 2.7'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.7', '< 7'
+gem 'rails', '~> 6.1.7.1', '< 7'
 # Use Puma as the app server
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.6.5', '< 6'
