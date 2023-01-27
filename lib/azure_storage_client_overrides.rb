@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'etc'
-require 'thread'
+require 'concurrent'
 require 'active_support/core_ext/numeric/bytes'
 require 'faraday'
 require 'faraday_middleware'
@@ -12,6 +11,7 @@ require 'azure/storage/common/core/auth/shared_access_signature'
 # perfomring operation in agents method. Try Using clear method  first instead of just setting agents instance variable to nil.
 module AzureStorageClientOverrides
   module BlobStorageClientOverride
+    PARALLEL_UPLOAD_MAX_CORES = Concurrent.processor_count
     def create_block_blob(container, blob, content, options = {})
       size = if content.respond_to? :size
         content.size
@@ -39,23 +39,20 @@ module AzureStorageClientOverrides
       block_size = get_block_size(size)
       # Get the number of blocks
       block_count = (Float(size) / Float(block_size)).ceil
-      max_thread_count = ENV.fetch('RAILS_MAX_THREADS', 1)
       block_list = []
 
-      (0...block_count).each_slice(max_thread_count) do |block_slice|
-        threads = []
-        thread_count = block_slice.count
-        block_slice_data = content.read(block_size * thread_count)
-        block_slice.each_with_index do |block_id, block_slice_index|
-          thread = Thread.new do
+      (0...block_count).each_slice(PARALLEL_UPLOAD_MAX_CORES) do |block_slice|
+        slice_count = block_slice.count
+        block_slice_data = content.read(block_size * slice_count)
+        futures = block_slice.each_with_index.map do |block_id, block_slice_index|
+          Concurrent::Promises.future(block_id, block_slice_index) do |block_id, block_slice_index|
             id = block_id.to_s.rjust(6, '0')
             put_blob_block(container, blob, id, block_slice_data.slice(block_slice_index * block_size, block_size), timeout: options[:timeout], lease_id: options[:lease_id])
             [id]
           end
-          thread.abort_on_exception = true
-          threads << thread
         end
-        block_list.concat(threads.map(&:value).sort)
+        completed = Concurrent::Promises.zip(*futures).value!
+        block_list.concat(completed.sort)
       end
 
       puts block_list.inspect
