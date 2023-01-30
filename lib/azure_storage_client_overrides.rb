@@ -1,15 +1,18 @@
 # frozen_string_literal: true
 
-require 'azure/storage/blob'
+require 'concurrent'
+require 'active_support/core_ext/numeric/bytes'
 require 'faraday'
 require 'faraday_middleware'
-require 'active_support/core_ext/numeric/bytes'
+require 'azure/storage/blob'
 require 'azure/storage/common/core/auth/shared_access_signature'
 # NOTE: this override is to prevent frequent Faraday::ConnectionFailed Connection Reset by peer error.
 # Increased pool size. made agents a threadsafe hash instead of a base one. removed redundant reuse_agent! method in favor of
 # perfomring operation in agents method. Try Using clear method  first instead of just setting agents instance variable to nil.
 module AzureStorageClientOverrides
   module BlobStorageClientOverride
+    PARALLEL_UPLOAD_MAX_CORES = Concurrent.processor_count
+
     def create_block_blob(container, blob, content, options = {})
       size = if content.respond_to? :size
         content.size
@@ -37,19 +40,21 @@ module AzureStorageClientOverrides
       block_size = get_block_size(size)
       # Get the number of blocks
       block_count = (Float(size) / Float(block_size)).ceil
+      block_list = []
 
-      put_block_blob_fiber = Fiber.new do
-        block_id = 0
-        while (chunk = content.read(block_size))
-          id = block_id.to_s.rjust(6, "0")
-          response = put_blob_block(container, blob, id, chunk, timeout: options[:timeout], lease_id: options[:lease_id])
-          Fiber.yield [id]
-          block_id += 1
+      (0...block_count).each_slice(PARALLEL_UPLOAD_MAX_CORES) do |block_slice|
+        slice_count = block_slice.count
+        block_slice_data = content.read(block_size * slice_count)
+        futures = block_slice.each_with_index.map do |block_id, block_slice_index|
+          Concurrent::Promises.future(block_id, block_slice_index) do |block_id, block_slice_index|
+            id = block_id.to_s.rjust(6, '0')
+            put_blob_block(container, blob, id, block_slice_data.slice(block_slice_index * block_size, block_size), timeout: options[:timeout], lease_id: options[:lease_id])
+            [id]
+          end
         end
-        nil
+        completed = Concurrent::Promises.zip(*futures).value!
+        block_list.concat(completed.sort)
       end
-
-      block_list = (0...block_count).map { put_block_blob_fiber.resume }
 
       # Commit the blocks put
       commit_options = {}
@@ -75,20 +80,21 @@ module AzureStorageClientOverrides
   end
 
   module CoreClientOverride
+    CLIENT_POOL_SIZE = Integer(Concurrent.processor_count * ENV.fetch('RAILS_MAX_THREADS', 1).to_i).freeze
+
     def agents(uri)
-      @agents ||= Concurrent::Map.new
+      @agents ||= {}
 
       uri = URI(uri) unless uri.is_a? URI
       key = uri.host
 
-      @agents.compute_if_present(key) do |agent|
-        agent.params.clear
-        agent.headers.clear
-        agent
+      if @agents.key?(key)
+        reuse_agent!(key)
+
+        return @agents[key]
       end
 
-      @agents.compute_if_absent(key) { build_http(uri) }
-
+      @agents[key] = build_http(uri)
       @agents[key]
     end
 
@@ -103,35 +109,49 @@ module AzureStorageClientOverrides
 
     private
 
-    def build_http(uri)
-      ssl_options = {}
-      if uri.is_a?(URI) && uri.scheme.downcase == 'https'
-        ssl_options[:version] = self.ssl_version if self.ssl_version
-        # min_version and max_version only supported in ruby 2.5
-        ssl_options[:min_version] = self.ssl_min_version if self.ssl_min_version
-        ssl_options[:max_version] = self.ssl_max_version if self.ssl_max_version
-        ssl_options[:ca_file] = self.ca_file if self.ca_file
-        ssl_options[:verify] = true
+    def reuse_agent!(key)
+      @agents[key].params.clear
+      @agents[key].headers.clear
+    end
+
+    def ssl_options(uri)
+      ssl_opts = {}
+
+      return ssl_opts unless uri.is_a?(URI) && uri.scheme.downcase == 'https'
+
+      ssl_opts[:version] = self.ssl_version if self.ssl_version
+      # min_version and max_version only supported in ruby 2.5
+      ssl_opts[:min_version] = self.ssl_min_version if self.ssl_min_version
+      ssl_opts[:max_version] = self.ssl_max_version if self.ssl_max_version
+      ssl_opts[:ca_file] = self.ca_file if self.ca_file
+      ssl_opts[:verify] = true
+      ssl_opts
+    end
+
+    def proxy_options
+      return unless %w[HTTP_PROXY HTTPS_PROXY].any? { |proxy_key| ENV.key?(proxy_key) }
+
+      parsed = nil
+      if ENV['HTTP_PROXY']
+        parsed = URI.parse(ENV['HTTP_PROXY'])
+      elsif ENV['HTTPS_PROXY']
+        parsed = URI.parse(ENV['HTTPS_PROXY'])
       end
-      proxy_options = if ENV['HTTP_PROXY']
-                        URI::parse(ENV['HTTP_PROXY'])
-                      elsif ENV['HTTPS_PROXY']
-                        URI::parse(ENV['HTTPS_PROXY'])
-                      end || nil
+      parsed
+    end
 
-      pool_size = ENV.fetch('RAILS_MAX_THREADS', 5)
-
-      Faraday.new(uri, ssl: ssl_options, proxy: proxy_options) do |conn|
+    def build_http(uri)
+      Faraday.new(uri, ssl: ssl_options(uri), proxy: proxy_options) do |conn|
         conn.use FaradayMiddleware::FollowRedirects
 
-        if Rails.env.development?
+        if Rails.env.production?
           conn.response :logger, Rails.logger do |rails_logger|
             rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
           end
         end
-        # conn.adapter :typhoeus, forbid_reuse: true, maxredirs: 3
-        conn.adapter :net_http_persistent, pool_size: pool_size do |http|
-          http.idle_timeout = 90
+
+        conn.adapter :net_http_persistent, pool_size: CLIENT_POOL_SIZE do |http|
+          http.idle_timeout = 100
         end
       end
     end
