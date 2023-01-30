@@ -12,6 +12,7 @@ require 'azure/storage/common/core/auth/shared_access_signature'
 module AzureStorageClientOverrides
   module BlobStorageClientOverride
     PARALLEL_UPLOAD_MAX_CORES = Concurrent.processor_count
+
     def create_block_blob(container, blob, content, options = {})
       size = if content.respond_to? :size
         content.size
@@ -55,7 +56,6 @@ module AzureStorageClientOverrides
         block_list.concat(completed.sort)
       end
 
-      puts block_list.inspect
       # Commit the blocks put
       commit_options = {}
       commit_options[:content_type] = content_type
@@ -80,7 +80,7 @@ module AzureStorageClientOverrides
   end
 
   module CoreClientOverride
-    CLIENT_POOL_SIZE = Integer(Etc.nprocessors.to_i * ENV.fetch('RAILS_MAX_THREADS', 1).to_i).freeze
+    CLIENT_POOL_SIZE = Integer(Concurrent.processor_count * ENV.fetch('RAILS_MAX_THREADS', 1).to_i).freeze
 
     def agents(uri)
       @agents ||= {}
