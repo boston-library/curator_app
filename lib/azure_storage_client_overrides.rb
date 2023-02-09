@@ -144,12 +144,6 @@ module AzureStorageClientOverrides
       Faraday.new(uri, ssl: ssl_options(uri), proxy: proxy_options) do |conn|
         conn.use FaradayMiddleware::FollowRedirects
 
-        if Rails.env.production?
-          conn.response :logger, Rails.logger do |rails_logger|
-            rails_logger.filter(/(Authorization:)(.+)/, '\1[REDACTED]')
-          end
-        end
-
         conn.adapter :net_http_persistent, pool_size: CLIENT_POOL_SIZE do |http|
           http.idle_timeout = 100
         end
