@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 2300dc7ce9269c0cdef3a64b4e98f5c8a76a2d90
+  revision: c20bd29fa954d3746f8c360334430b130b98be7a
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -302,7 +302,7 @@ GEM
       connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
-    slop (4.10.0)
+    slop (4.10.1)
     solr_wrapper (4.0.2)
       http
       minitar
