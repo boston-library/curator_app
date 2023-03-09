@@ -59,12 +59,12 @@ namespace :boston_library do
   desc 'Update ruby version for systemd service'
   task :update_service_ruby do
     on roles(:app) do
-      execute("sudo rm /etc/systemd/system/commonwealth_admin_puma.service.d/override.conf | true
+      execute("sudo rm /etc/systemd/system/\"#{fetch(:user)}\"_puma.service.d/override.conf | true
               SERVICE_RUBY_VERSION=`cat /home/\"#{fetch(:user)}\"/railsApps/\"#{fetch(:application)}\"/current/.ruby-version`
               echo \"SERVICE_RUBY_VERSION IS: \" ${SERVICE_RUBY_VERSION}
               echo '[Service]' > override.conf
               echo \"Environment=SERVICE_RUBY_VERSION=${SERVICE_RUBY_VERSION}\" >> override.conf
-              sudo mv override.conf /etc/systemd/system/commonwealth_admin_puma.service.d/override.conf
+              sudo mv override.conf /etc/systemd/system/\"#{fetch(:user)}\"_puma.service.d/override.conf
               sudo /bin/systemctl daemon-reload")
     end
   end
@@ -94,8 +94,7 @@ namespace :boston_library do
   desc "#{fetch(:application)} restart #{fetch(:application)}_puma service"
   task :"restart_#{fetch(:application)}_puma" do
     on roles(:app), in: :sequence, wait: 5 do
-      # execute "sudo /bin/systemctl restart #{fetch(:application)}_puma.socket #{fetch(:application)}_puma.service"
-      execute 'sudo /bin/systemctl restart commonwealth_admin_puma.socket commonwealth_admin_puma.service'
+      execute "sudo /bin/systemctl restart #{fetch(:application)}_puma.socket #{fetch(:application)}_puma.service"
       sleep(5)
     end
   end
