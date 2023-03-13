@@ -8,8 +8,6 @@ set :use_sudo, false
 set :stage_case, ENV['STAGE_NAME']
 
 set :application, 'curator_app'
-# set :git_http_username, ENV['GIT_HTTP_USERNAME']
-# set :git_http_password, ENV['GIT_HTTP_PASSWORD']
 set :repo_url, "https://github.com/boston-library/#{fetch(:application)}.git"
 
 ###### Make user home path dynamic.
@@ -122,7 +120,6 @@ after :'bundler:config', :'bundler:install'
 before :'deploy:cleanup', :'boston_library:upload_gemfile'
 after :'deploy:cleanup', :'boston_library:rails_console_runner'
 after :'boston_library:rails_console_runner', :'boston_library:update_service_ruby'
-## Although Commonwealth_3 doesn't enable its front end 03/09/2023, but puma systemd service still works.
 after :'boston_library:update_service_ruby', :"boston_library:restart_#{fetch(:application)}_puma"
 after :"boston_library:restart_#{fetch(:application)}_puma", :'boston_library:restart_nginx'
 after :'boston_library:restart_nginx', :'boston_library:list_releases'
