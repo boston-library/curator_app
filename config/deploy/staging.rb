@@ -19,11 +19,6 @@ SSHKit.config.command_map[:rm] = 'sudo rm'
 # Custom SSH Options
 # SSH to remote server uses username/password.
 # For security reason, here uses ssh key.
-
-# server fetch(:server_ip).to_s, user: fetch(:user).to_s, role: %w[app db web], ssh_options: { keys: fetch(:ssh_key).to_s }
-
-## Following SSH options works but cannot pass the "rubocop" checking.
-## To be unified, it's better use below option though.
 server fetch(:server_ip).to_s, {
   :user => fetch(:user).to_s,
   :role => %w[app db web],
