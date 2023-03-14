@@ -92,7 +92,8 @@ namespace :boston_library do
   desc "#{fetch(:application)} restart #{fetch(:application)}_puma service"
   task :"restart_#{fetch(:application)}_puma" do
     on roles(:app), in: :sequence, wait: 5 do
-      execute "sudo /bin/systemctl restart #{fetch(:application)}_puma.socket #{fetch(:application)}_puma.service"
+      execute "sudo /bin/systemctl restart #{fetch(:application)}_puma.socket #{fetch(:application)}_puma.service curator_sidekiq.target"
+      # execute "sudo /bin/systemctl restart curator_sidekiq.target"
       sleep(5)
     end
   end
