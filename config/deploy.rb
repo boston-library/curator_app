@@ -76,18 +76,18 @@ namespace :boston_library do
     end
   end
 
-  # rubocop:disable Metrics/LineLength
-  desc 'Run a console command to test -rails console-'
-  task :rails_console_runner do
-    on roles(:app), in: :sequence, wait: 5 do
-      as fetch(:user) do
-        within release_path do
-          puts capture("cd #{release_path}; #{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do #{release_path}/bin/rails runner -e staging \"puts 'rails console works!'\"")
-        end
-      end
-    end
-  end
-  # rubocop:enable Metrics/LineLength
+  # # rubocop:disable Metrics/LineLength
+  # desc 'Run a console command to test -rails console-'
+  # task :rails_console_runner do
+  #   on roles(:app), in: :sequence, wait: 5 do
+  #     as fetch(:user) do
+  #       within release_path do
+  #         puts capture("cd #{release_path}; #{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do #{release_path}/bin/rails runner -e staging \"puts 'rails console works!'\"")
+  #       end
+  #     end
+  #   end
+  # end
+  # # rubocop:enable Metrics/LineLength
 
   desc "#{fetch(:application)} restart #{fetch(:application)}_puma service"
   task :"restart_#{fetch(:application)}_puma" do
@@ -118,8 +118,9 @@ after :'boston_library:rvm_install_ruby', :'boston_library:install_bundler'
 after :'boston_library:install_bundler', :'bundler:config'
 after :'bundler:config', :'bundler:install'
 before :'deploy:cleanup', :'boston_library:upload_gemfile'
-after :'deploy:cleanup', :'boston_library:rails_console_runner'
-after :'boston_library:rails_console_runner', :'boston_library:update_service_ruby'
+# after :'deploy:cleanup', :'boston_library:rails_console_runner'
+# after :'boston_library:rails_console_runner', :'boston_library:update_service_ruby'
+after :'deploy:cleanup', :'boston_library:update_service_ruby'
 after :'boston_library:update_service_ruby', :"boston_library:restart_#{fetch(:application)}_puma"
 after :"boston_library:restart_#{fetch(:application)}_puma", :'boston_library:restart_nginx'
 after :'boston_library:restart_nginx', :'boston_library:list_releases'
