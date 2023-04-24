@@ -285,6 +285,8 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redis (4.8.0)
+    redis-client (0.14.1)
+      connection_pool
     request_store (1.5.1)
       rack (>= 1.4)
     retriable (3.1.2)
@@ -298,10 +300,11 @@ GEM
     ruby2_keywords (0.0.5)
     scrub_rb (1.0.1)
     sd_notify (0.1.1)
-    sidekiq (6.5.8)
-      connection_pool (>= 2.2.5, < 3)
-      rack (~> 2.0)
-      redis (>= 4.5.0, < 5)
+    sidekiq (7.0.8)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.11.0)
     slop (4.10.1)
     solr_wrapper (4.0.2)
       http
@@ -367,7 +370,7 @@ DEPENDENCIES
   rails (~> 6.1.7.1, < 7)
   redis (~> 4.8, < 5)
   sd_notify
-  sidekiq (~> 6.5, < 7)
+  sidekiq (~> 7.0)
   solr_wrapper (~> 4)
   spring (~> 2.1)
   tzinfo-data
