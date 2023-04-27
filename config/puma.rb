@@ -22,9 +22,6 @@ preload_app!
 # New feature that reduces latency https://github.com/puma/puma/blob/master/5.0-Upgrade.md#lower-latency-better-throughput
 wait_for_less_busy_worker 0.002
 
-# New feature that runs garbage collector when forking workers https://github.com/puma/puma/blob/master/5.0-Upgrade.md#nakayoshi_fork
-nakayoshi_fork
-
 on_restart do
    puts "Refreshing Gemfile at #{app_dir}/Gemfile"
    ENV['BUNDLE_GEMFILE'] = "#{app_dir}/Gemfile"
