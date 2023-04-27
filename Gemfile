@@ -11,7 +11,7 @@ gem 'rails', '~> 6.1.7.1', '< 7'
 # Use Puma as the app server
 gem 'alba', '~> 2.2', '< 2.3'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 5.6.5', '< 6'
+gem 'puma', '~> 6.2'
 gem 'oj', '~> 3.13'
 gem 'sidekiq', '~> 7.0'
 gem 'connection_pool', '~> 2.3'
