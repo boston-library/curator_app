@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: c22f7d2b889a9061b16c10d37f73f639ac175ac5
+  revision: 245863bee376715f902063dfea159c7ed77d0686
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -99,7 +99,7 @@ GEM
     after_commit_everywhere (1.3.0)
       activerecord (>= 4.2)
       activesupport
-    alba (2.2.0)
+    alba (2.3.0)
     attr_json (2.0.1)
       activerecord (>= 6.0.0, < 7.1)
     awesome_print (1.9.2)
@@ -233,7 +233,7 @@ GEM
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
     oj (3.14.2)
-    ox (2.14.14)
+    ox (2.14.16)
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
