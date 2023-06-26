@@ -96,7 +96,7 @@ GEM
       activerecord (>= 4.2)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    after_commit_everywhere (1.3.0)
+    after_commit_everywhere (1.3.1)
       activerecord (>= 4.2)
       activesupport
     alba (2.2.0)
@@ -130,7 +130,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    down (5.4.0)
+    down (5.4.1)
       addressable (~> 2.8)
     erubi (1.12.0)
     factory_bot (6.2.1)
