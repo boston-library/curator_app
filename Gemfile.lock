@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 66c0a26588df04544c7b22b4d00059024743b258
+  revision: 56ea1ecef81d46ec190d4fbf9bf3f0654a479ba0
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -100,7 +100,7 @@ GEM
       activerecord (>= 4.2)
       activesupport
     alba (2.2.0)
-    attr_json (2.0.1)
+    attr_json (2.1.0)
       activerecord (>= 6.0.0, < 7.1)
     awesome_print (1.9.2)
     azure-storage-blob (2.0.3)
@@ -207,9 +207,9 @@ GEM
       marc (~> 1.0)
     marcel (1.0.2)
     method_source (1.0.0)
-    mime-types (3.4.1)
+    mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0218.1)
+    mime-types-data (3.2023.0808)
     mini_magick (4.11.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
@@ -233,7 +233,7 @@ GEM
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     oj (3.15.0)
-    ox (2.14.16)
+    ox (2.14.17)
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -292,7 +292,7 @@ GEM
     request_store (1.5.1)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rsolr (2.5.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
