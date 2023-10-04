@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: bea2ef26e0c3c5a1989411c924b160053296aa23
+  revision: 036e8bdb7ab7f5fd81194fa1c3db9b693581dd69
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -227,7 +227,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0808)
+    mime-types-data (3.2023.1003)
     mini_magick (4.11.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
