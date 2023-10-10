@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 036e8bdb7ab7f5fd81194fa1c3db9b693581dd69
+  revision: 40d86ec464ff1531164c02f40a11b9db6e9c2d1d
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -102,8 +102,8 @@ GEM
     airbrussh (1.5.0)
       sshkit (>= 1.6.1, != 1.7.0)
     alba (2.2.0)
-    attr_json (2.1.0)
-      activerecord (>= 6.0.0, < 7.1)
+    attr_json (2.2.0)
+      activerecord (>= 6.0.0, < 7.2)
     awesome_print (1.9.2)
     azure-storage-blob (2.0.3)
       azure-storage-common (~> 2.0)
