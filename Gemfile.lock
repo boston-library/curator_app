@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: c07b7346b76e817cf52c028fe789a33a3dbbf2a5
+  revision: 68bddea6e1f0dbc9c2ee986b0672d340b44ad70e
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
