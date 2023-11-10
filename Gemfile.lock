@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 68bddea6e1f0dbc9c2ee986b0672d340b44ad70e
+  revision: ed8631be163b1fb0bc23f3b9e7c818a12f35ebd2
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -407,7 +407,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.8p225
+   ruby 3.0.6p216
 
 BUNDLED WITH
    2.3.26
