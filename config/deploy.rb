@@ -67,7 +67,7 @@ namespace :boston_library do
     end
   end
 
-  ## Update ruby version for systemd service
+  ## Update ruby version for curator_sidekiq service
   desc 'Update ruby version for systemd sidekiq service'
   task :update_sidekiq_service_ruby do
     on roles(:app) do
@@ -77,6 +77,7 @@ namespace :boston_library do
               sudo /bin/systemctl daemon-reload")
     end
   end
+
   # desc 'Copy Gemfile and Gemfile.lock to shared directory'
   # task :upload_gemfile do
   #   on roles(:app) do
