@@ -71,12 +71,12 @@ namespace :boston_library do
   desc 'Update ruby version for systemd sidekiq service'
   task :update_sidekiq_service_ruby do
     on roles(:app) do
-      execute("sudo rm /etc/systemd/system/curator_sidekiq@.service.d/override.conf | true
+      execute("sudo rm /etc/systemd/system/curator_sidekiq.target.d/override.conf | true
               SERVICE_RUBY_VERSION=`cat /home/\"#{fetch(:user)}\"/railsApps/\"#{fetch(:application)}\"/current/.ruby-version`
               echo \"SERVICE_RUBY_VERSION IS: \" ${SERVICE_RUBY_VERSION}
               echo '[Service]' > override.conf
               echo \"Environment=SERVICE_RUBY_VERSION=${SERVICE_RUBY_VERSION}\" >> override.conf
-              sudo mv override.conf /etc/systemd/system/curator_sidekiq@.service.d/override.conf
+              sudo mv override.conf /etc/systemd/system/curator_sidekiq.target.d/override.conf
               sudo /bin/systemctl daemon-reload")
     end
   end
