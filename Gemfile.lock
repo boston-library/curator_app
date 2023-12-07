@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: ed8631be163b1fb0bc23f3b9e7c818a12f35ebd2
+  revision: 548b650f7e01e5fdc10d9abe306deaf7a0772896
   specs:
     curator (0.2.0)
       aasm (~> 5.3)
@@ -102,7 +102,7 @@ GEM
     airbrussh (1.5.0)
       sshkit (>= 1.6.1, != 1.7.0)
     alba (2.2.0)
-    attr_json (2.2.0)
+    attr_json (2.3.0)
       activerecord (>= 6.0.0, < 7.2)
     awesome_print (1.9.2)
     azure-storage-blob (2.0.3)
@@ -227,7 +227,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.1003)
+    mime-types-data (3.2023.1205)
     mini_magick (4.11.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
