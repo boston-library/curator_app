@@ -54,8 +54,8 @@ namespace :boston_library do
   end
 
   ## Update ruby version for systemd service
-  desc 'Update ruby version for systemd service'
-  task :update_service_ruby do
+  desc 'Update ruby version for systemd app service'
+  task :update_app_service_ruby do
     on roles(:app) do
       execute("sudo rm /etc/systemd/system/\"#{fetch(:application)}\"_puma.service.d/override.conf | true
               SERVICE_RUBY_VERSION=`cat /home/\"#{fetch(:user)}\"/railsApps/\"#{fetch(:application)}\"/current/.ruby-version`
@@ -63,6 +63,17 @@ namespace :boston_library do
               echo '[Service]' > override.conf
               echo \"Environment=SERVICE_RUBY_VERSION=${SERVICE_RUBY_VERSION}\" >> override.conf
               sudo mv override.conf /etc/systemd/system/\"#{fetch(:application)}\"_puma.service.d/override.conf
+              sudo /bin/systemctl daemon-reload")
+    end
+  end
+
+  ## Update ruby version for curator_sidekiq service
+  desc 'Update ruby version for systemd sidekiq service'
+  task :update_sidekiq_service_ruby do
+    on roles(:app) do
+      execute("SERVICE_RUBY_VERSION=`cat /home/\"#{fetch(:user)}\"/railsApps/\"#{fetch(:application)}\"/current/.ruby-version`
+              echo \"SERVICE_RUBY_VERSION IS: \" ${SERVICE_RUBY_VERSION}
+              sudo sed -i -e \"s/^DefaultEnvironment=CuratorSidekiqRubyVersion=.*/DefaultEnvironment=CuratorSidekiqRubyVersion=${SERVICE_RUBY_VERSION}/g\" /etc/systemd/system.conf
               sudo /bin/systemctl daemon-reload")
     end
   end
@@ -105,7 +116,8 @@ after :'boston_library:rvm_install_ruby', :'boston_library:install_bundler'
 after :'boston_library:install_bundler', :'bundler:config'
 after :'bundler:config', :'bundler:install'
 # before :'deploy:cleanup', :'boston_library:upload_gemfile'
-after :'deploy:cleanup', :'boston_library:update_service_ruby'
-after :'boston_library:update_service_ruby', :"boston_library:restart_#{fetch(:application)}_puma"
+after :'deploy:cleanup', :'boston_library:update_sidekiq_service_ruby'
+after :'boston_library:update_sidekiq_service_ruby', :'boston_library:update_app_service_ruby'
+after :'boston_library:update_app_service_ruby', :"boston_library:restart_#{fetch(:application)}_puma"
 after :"boston_library:restart_#{fetch(:application)}_puma", :'boston_library:restart_nginx'
 after :'boston_library:restart_nginx', :'boston_library:list_releases'
