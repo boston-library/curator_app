@@ -7,4 +7,5 @@ production:
   - curator_app_indexing
   - curator_app_arks
   - curator_app_filestream_derivatives
+  - curator_app_iiif
   - curator_app_default
