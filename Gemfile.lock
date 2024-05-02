@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: c4477000993a6d9b53a01e236e9b3149a826c64e
+  revision: bc3f8de7869cd34baae823b795e8195fd3dcb4f3
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -151,7 +151,7 @@ GEM
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
       railties (>= 3.2)
-    down (5.4.1)
+    down (5.4.2)
       addressable (~> 2.8)
     erubi (1.12.0)
     factory_bot (6.2.1)
@@ -262,7 +262,7 @@ GEM
       racc (~> 1.4)
     oj (3.16.3)
       bigdecimal (>= 3.0)
-    ox (2.14.17)
+    ox (2.14.18)
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
@@ -319,11 +319,11 @@ GEM
       connection_pool
     reline (0.4.3)
       io-console (~> 0.5)
-    request_store (1.6.0)
+    request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
     rexml (3.2.6)
-    rsolr (2.5.0)
+    rsolr (2.6.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
     ruby-progressbar (1.11.0)
