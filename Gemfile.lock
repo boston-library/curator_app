@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: bc3f8de7869cd34baae823b795e8195fd3dcb4f3
+  revision: 1eb83cc868a432bb4e8cd733b639e1e00b385807
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -14,7 +14,7 @@ GIT
       connection_pool (~> 2.4)
       down (~> 5.4)
       htmlentities (~> 4.3)
-      http (~> 5.1)
+      http (~> 5.2)
       mime-types (~> 3.4)
       nokogiri (>= 1.16.2)
       oj (~> 3.16)
@@ -22,7 +22,7 @@ GIT
       paper_trail (~> 12.3)
       paper_trail-association_tracking (~> 2.2)
       rails (~> 6.1.7, < 7)
-      rsolr (~> 2.5)
+      rsolr (~> 2.6)
       traject (~> 3.8)
 
 GEM
@@ -113,6 +113,7 @@ GEM
       faraday_middleware (~> 1.0, >= 1.0.0.rc1)
       net-http-persistent (~> 4.0)
       nokogiri (~> 1, >= 1.10.8)
+    base64 (0.2.0)
     bigdecimal (3.1.6)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
@@ -192,11 +193,12 @@ GEM
       activesupport (>= 6.1)
     hashie (5.0.0)
     htmlentities (4.3.4)
-    http (5.1.0)
+    http (5.2.0)
       addressable (~> 2.8)
+      base64 (~> 0.1)
       http-cookie (~> 1.0)
       http-form_data (~> 2.2)
-      llhttp-ffi (~> 0.4.0)
+      llhttp-ffi (~> 0.5.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     http-form_data (2.3.0)
@@ -213,7 +215,7 @@ GEM
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    llhttp-ffi (0.4.0)
+    llhttp-ffi (0.5.0)
       ffi-compiler (~> 1.0)
       rake (~> 13.0)
     loofah (2.22.0)
@@ -234,7 +236,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0305)
+    mime-types-data (3.2024.0507)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.5)
