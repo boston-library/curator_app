@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 1eb83cc868a432bb4e8cd733b639e1e00b385807
+  revision: 2bfcf87f29a0de1cbde2bdb368372cd01ba554c5
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -323,8 +323,8 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.2.9)
+      strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
