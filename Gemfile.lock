@@ -323,7 +323,7 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.3.0)
+    rexml (3.3.2)
       strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
@@ -413,7 +413,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.1.5p252
+   ruby 3.1.6p260
 
 BUNDLED WITH
    2.5.9
