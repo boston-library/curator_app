@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 2bfcf87f29a0de1cbde2bdb368372cd01ba554c5
+  revision: 03289d4058e2afbb7137b4372359b87bbf6f0c4d
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -92,7 +92,7 @@ GEM
       minitest (>= 5.1)
       tzinfo (~> 2.0)
       zeitwerk (~> 2.3)
-    acts_as_list (1.2.1)
+    acts_as_list (1.2.2)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
     addressable (2.8.1)
@@ -235,7 +235,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0604)
+    mime-types-data (3.2024.0806)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
@@ -323,7 +323,7 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.3.3)
+    rexml (3.3.4)
       strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
