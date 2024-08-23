@@ -323,7 +323,7 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.3.4)
+    rexml (3.3.6)
       strscan
     rsolr (2.6.0)
       builder (>= 2.1.2)
