@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 03289d4058e2afbb7137b4372359b87bbf6f0c4d
+  revision: cab69c343dad24a7739ebeb0f6c17913b7db051d
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -103,8 +103,8 @@ GEM
     airbrussh (1.5.1)
       sshkit (>= 1.6.1, != 1.7.0)
     alba (2.2.0)
-    attr_json (2.3.1)
-      activerecord (>= 6.0.0, < 7.2)
+    attr_json (2.4.0)
+      activerecord (>= 6.0.0, < 7.3)
     azure-storage-blob (2.0.3)
       azure-storage-common (~> 2.0)
       nokogiri (~> 1, >= 1.10.8)
@@ -235,7 +235,7 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2024.0806)
+    mime-types-data (3.2024.0903)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
     mini_portile2 (2.8.7)
@@ -323,8 +323,7 @@ GEM
     request_store (1.7.0)
       rack (>= 1.4)
     retriable (3.1.2)
-    rexml (3.3.6)
-      strscan
+    rexml (3.3.7)
     rsolr (2.6.0)
       builder (>= 2.1.2)
       faraday (>= 0.9, < 3, != 2.0.0)
@@ -355,7 +354,6 @@ GEM
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stringio (3.1.0)
-    strscan (3.1.0)
     thor (1.3.1)
     timeout (0.4.1)
     traject (3.8.2)
