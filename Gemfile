@@ -14,6 +14,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 6.4'
 gem 'oj', '~> 3.16'
 gem 'sidekiq', '~> 7.3.2'
+gem 'concurrent-ruby', '1.3.4' # NOTE need to lock it to this version for now due to a bug introduced in 1.3.5
 gem 'connection_pool', '~> 2.4'
 gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
