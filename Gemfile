@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 3.2.5'
+ruby '~> 3.2.8'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
@@ -11,11 +11,11 @@ gem 'rails', '~> 7.0.8'
 # Use Puma as the app server
 gem 'alba', '~> 2.4'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 6.4'
+gem 'puma', '~> 6.6'
 gem 'oj', '~> 3.16'
-gem 'sidekiq', '~> 7.3.2'
+gem 'sidekiq', '~> 7.3.9'
 gem 'concurrent-ruby', '1.3.4' # NOTE need to lock it to this version for now due to a bug introduced in 1.3.5
-gem 'connection_pool', '~> 2.4'
+gem 'connection_pool', '~> 2.5'
 gem 'faraday', '~> 1.10', '< 2'
 gem 'faraday_middleware','~> 1.0'
 gem 'net-http-persistent', '>= 4'
