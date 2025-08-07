@@ -121,7 +121,7 @@ GEM
       net-http-persistent (~> 4.0)
       nokogiri (~> 1, >= 1.10.8)
     base64 (0.2.0)
-    bigdecimal (3.1.9)
+    bigdecimal (3.2.2)
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.3.0)
@@ -141,7 +141,7 @@ GEM
     concurrent-ruby (1.3.4)
     concurrent-ruby-ext (1.3.4)
       concurrent-ruby (= 1.3.4)
-    connection_pool (2.5.0)
+    connection_pool (2.5.3)
     crass (1.0.6)
     csv (3.3.2)
     date (3.4.1)
@@ -266,30 +266,52 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     net-ssh (7.3.0)
-    nio4r (2.7.3)
+    nio4r (2.7.4)
     nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    oj (3.16.10)
+    nokogiri (1.18.9-aarch64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-aarch64-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm-linux-musl)
+      racc (~> 1.4)
+    nokogiri (1.18.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-gnu)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-linux-musl)
+      racc (~> 1.4)
+    oj (3.16.11)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
-    ostruct (0.6.1)
-    ox (2.14.22)
+    ostruct (0.6.3)
+    ox (2.14.23)
       bigdecimal (>= 3.0)
     paper_trail (12.3.0)
       activerecord (>= 5.2)
       request_store (~> 1.1)
     paper_trail-association_tracking (2.2.1)
       paper_trail (>= 12.0)
-    pg (1.5.9)
+    pg (1.6.1)
+    pg (1.6.1-aarch64-linux)
+    pg (1.6.1-aarch64-linux-musl)
+    pg (1.6.1-arm64-darwin)
+    pg (1.6.1-x86_64-darwin)
+    pg (1.6.1-x86_64-linux)
+    pg (1.6.1-x86_64-linux-musl)
     psych (5.2.6)
       date
       stringio
     public_suffix (5.0.0)
-    puma (6.6.0)
+    puma (6.6.1)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (2.2.14)
+    rack (2.2.17)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-test (2.2.0)
@@ -328,9 +350,9 @@ GEM
       ffi (~> 1.0)
     rdoc (6.6.3.1)
       psych (>= 4.0.0)
-    redis (5.3.0)
+    redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.24.0)
+    redis-client (0.25.1)
       connection_pool
     reline (0.4.3)
       io-console (~> 0.5)
@@ -393,7 +415,17 @@ GEM
     zeitwerk (2.6.18)
 
 PLATFORMS
+  aarch64-linux
+  aarch64-linux-gnu
+  aarch64-linux-musl
+  arm-linux-gnu
+  arm-linux-musl
+  arm64-darwin
   ruby
+  x86_64-darwin
+  x86_64-linux
+  x86_64-linux-gnu
+  x86_64-linux-musl
 
 DEPENDENCIES
   alba (~> 2.4)
@@ -425,7 +457,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.2.8p263
+   ruby 3.2.9p265
 
 BUNDLED WITH
-   2.6.8
+   2.7.1
