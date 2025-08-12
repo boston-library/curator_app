@@ -2,6 +2,7 @@
 
 Curator.config do |config|
   if %w(staging production).member?(Rails.env)
+    config.allmaps_annotations_url = Rails.application.credentials[:allmaps_annotations_url]
     config.ark_manager_api_url = Rails.application.credentials[:ark_manager_api_url]
     config.authority_api_url = Rails.application.credentials[:authority_api_url]
     config.solr_url = Rails.application.credentials[:solr_url]
@@ -21,6 +22,7 @@ Curator.config do |config|
     }
     config.iiif_server_credentials = Rails.application.credentials.dig(:iiif, :credentials)
   else
+    config.allmaps_annotations_url = ENV['ALLMAPS_ANNOTATIONS_URL']
     config.ark_manager_api_url = ENV['ARK_MANAGER_API_URL']
     config.authority_api_url = ENV['AUTHORITY_API_URL']
     config.solr_url = ENV['CURATOR_SOLR_URL']
