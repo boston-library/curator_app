@@ -50,8 +50,10 @@ Rails.application.configure do
   config.cache_store = :redis_cache_store,
                        {
                          url: ENV.fetch('CURATOR_APP_REDIS_CACHE_URL') { Rails.application.credentials.dig(:redis, :cache_url) },
-                         pool_size: ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 2,
-                         pool_timeout: 15,
+                         pool: {
+                           size: ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 2,
+                           timeout: 15
+                         },
                          expires_in: 24.hours
                        }
 

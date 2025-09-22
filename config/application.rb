@@ -24,7 +24,7 @@ Bundler.require(*Rails.groups)
 module CuratorApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.0
+    config.load_defaults 7.1
     config.api_only = true
     config.eager_load_paths += %W(#{config.root}/lib)
 
@@ -33,6 +33,9 @@ module CuratorApp
     config.active_storage.queues.analysis   = nil       # defaults to "active_storage_analysis"
     config.active_storage.queues.purge      = nil       # defaults to "active_storage_purge"
     config.active_storage.queues.mirror     = nil       # defaults to "active_storage_mirror
+    config.active_storage.previewers.delete(ActiveStorage::Previewer::VideoPreviewer)
+    config.active_storage.previewers.delete(ActiveStorage::Previewer::MuPDFPreviewer)
+    config.active_storage.previewers.delete(ActiveStorage::Previewer::PopplerPDFPreviewer)
 
     config.session_store :cookie_store, key: '_interslice_session'
     config.middleware.use ActionDispatch::Cookies
