@@ -134,7 +134,7 @@ GEM
       nokogiri (~> 1, >= 1.10.8)
     base64 (0.3.0)
     benchmark (0.4.1)
-    bigdecimal (3.2.3)
+    bigdecimal (3.3.1)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     builder (3.3.0)
@@ -493,7 +493,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.3.9p170
+   ruby 3.3.10p183
 
 BUNDLED WITH
    2.7.2
