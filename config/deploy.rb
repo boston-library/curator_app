@@ -22,7 +22,7 @@ set :rvm_bundle_version, File.read(File.expand_path('./Gemfile.lock'))[-10..-1].
 set :pty, true
 
 ## As bin/puma, bin/pumactl are sensitive to current project directory, it is better not to use a symlink
-append :linked_files, 'config/database.yml', 'config/credentials/staging.key', 'config/credentials/production.key', 'config/environments/staging.rb'
+append :linked_files, 'config/database.yml', 'config/credentials/staging.key', 'config/credentials/production.key'
 append :linked_dirs, 'log', 'tmp/cache', 'tmp/pids', 'tmp/sockets', 'bundle'
 
 # Default value for keep_releases is 5
