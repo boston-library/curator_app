@@ -24,7 +24,7 @@ Bundler.require(*Rails.groups)
 module CuratorApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
     config.api_only = true
     config.eager_load_paths += %W(#{config.root}/lib)
 
