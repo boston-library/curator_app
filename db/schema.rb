@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_151623) do
+ActiveRecord::Schema[7.2].define(version: 2026_01_22_205347) do
+  create_schema "curator"
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "btree_gin"
@@ -42,7 +43,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_curator.active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -55,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_curator.active_storage_blobs_on_key", unique: true
   end
 
@@ -71,8 +72,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "name", null: false
     t.text "abstract", default: ""
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["ark_id"], name: "index_curator.collections_on_ark_id", unique: true
     t.index ["institution_id"], name: "index_curator.collections_on_institution_id"
   end
@@ -82,8 +83,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "code"
     t.string "base_url"
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["base_url", "code"], name: "unique_idx_ctrl_term_auth_on_base_url", unique: true, where: "((base_url IS NOT NULL) AND ((base_url)::text <> ''::text) AND (code IS NOT NULL) AND ((code)::text <> ''::text))"
     t.index ["code"], name: "unique_idx_ctrl_term_auth_on_code", unique: true, where: "((code IS NOT NULL) AND ((code)::text <> ''::text))"
   end
@@ -93,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.jsonb "term_data", default: "{}"
     t.string "type", null: false
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index "(((term_data ->> 'basic'::text))::boolean)", name: "index_ctl_terms_basic_genre_jsonb_field", where: "((type)::text = 'Curator::ControlledTerms::Genre'::text)"
     t.index "((term_data ->> 'id_from_auth'::text))", name: "index_ctl_terms_nom_id_from_auth_jsonb_field"
     t.index ["authority_id"], name: "index_curator.controlled_terms_nomenclatures_on_authority_id"
@@ -107,9 +108,9 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "ark_id", null: false
     t.bigint "admin_set_id", null: false
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "archived_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "archived_at", precision: nil
     t.bigint "contained_by_id"
     t.index ["admin_set_id"], name: "index_curator.digital_objects_on_admin_set_id"
     t.index ["archived_at"], name: "index_curator.digital_objects_on_archived_at", where: "(archived_at IS NULL)"
@@ -123,10 +124,10 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "file_set_type", null: false
     t.string "file_name_base", null: false
     t.integer "position", null: false
-    t.jsonb "pagination", default: "{}"
+    t.jsonb "pagination", default: {}
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "file_set_of_id", null: false
     t.index ["ark_id"], name: "index_curator.filestreams_file_sets_on_ark_id", unique: true
     t.index ["file_set_of_id"], name: "index_fstream_file_set_on_file_set_of_id"
@@ -142,8 +143,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "url"
     t.text "abstract", default: ""
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["ark_id"], name: "index_curator.institutions_on_ark_id", unique: true
     t.index ["location_id"], name: "index_inst_on_geo_location_nom"
   end
@@ -216,8 +217,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.string "flagged"
     t.string "destination_site", default: ["commonwealth"], array: true
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["administratable_type", "administratable_id"], name: "unique_idx_meta_admin_on_metastreamable_poly", unique: true
     t.index ["description_standard"], name: "idx_administrative_on_not_null_desc_standard", where: "(description_standard IS NOT NULL)"
     t.index ["destination_site"], name: "index_curator.metastreams_administratives_on_destination_site", using: :gin
@@ -238,7 +239,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.jsonb "related", default: {}
     t.jsonb "cartographic", default: {}
     t.jsonb "publication", default: {}
-    t.enum "digital_origin", default: "reformatted_digital", enum_name: "metastreams_descriptives_digital_origin"
+    t.enum "digital_origin", default: "reformatted_digital", enum_type: "metastreams_descriptives_digital_origin"
     t.integer "text_direction"
     t.boolean "resource_type_manuscript", default: false
     t.string "origin_event"
@@ -258,8 +259,8 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.text "toc", default: ""
     t.text "abstract", default: ""
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "digital_object_id", null: false
     t.index ["cartographic"], name: "index_curator.metastreams_descriptives_on_cartographic", opclass: :jsonb_path_ops, using: :gin
     t.index ["date"], name: "index_curator.metastreams_descriptives_on_date", opclass: :jsonb_path_ops, using: :gin
@@ -278,12 +279,12 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
   create_table "metastreams_workflows", force: :cascade do |t|
     t.string "workflowable_type", null: false
     t.bigint "workflowable_id", null: false
-    t.enum "publishing_state", enum_name: "metastreams_workflow_publishing_state"
-    t.enum "processing_state", enum_name: "metastreams_workflow_processing_state"
+    t.enum "publishing_state", enum_type: "metastreams_workflow_publishing_state"
+    t.enum "processing_state", enum_type: "metastreams_workflow_processing_state"
     t.string "ingest_origin", null: false
     t.integer "lock_version"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["processing_state"], name: "idx_meta_workflow_on_processing_state"
     t.index ["publishing_state"], name: "idx_meta_workflow_on_publsihing_state"
     t.index ["workflowable_type", "workflowable_id"], name: "unique_idx_meta_workflows_on_metastreamable_poly", unique: true
@@ -306,7 +307,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_151623) do
     t.json "object"
     t.string "item_subtype"
     t.json "object_changes"
-    t.datetime "created_at"
+    t.datetime "created_at", precision: nil
     t.integer "transaction_id"
     t.index ["item_type", "item_id"], name: "index_curator.versions_on_item_type_and_item_id"
     t.index ["transaction_id"], name: "index_curator.versions_on_transaction_id"
