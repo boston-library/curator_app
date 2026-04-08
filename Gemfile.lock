@@ -110,7 +110,7 @@ GEM
     acts_as_list (1.2.4)
       activerecord (>= 6.1)
       activesupport (>= 6.1)
-    addressable (2.8.8)
+    addressable (2.9.0)
       public_suffix (>= 2.0.2, < 8.0)
     after_commit_everywhere (1.6.0)
       activerecord (>= 4.2)
@@ -332,7 +332,7 @@ GEM
     psych (5.2.6)
       date
       stringio
-    public_suffix (6.0.2)
+    public_suffix (7.0.5)
     puma (6.6.1)
       nio4r (~> 2.0)
     racc (1.8.1)
