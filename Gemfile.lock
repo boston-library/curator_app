@@ -154,7 +154,7 @@ GEM
     connection_pool (2.5.4)
     crass (1.0.6)
     csv (3.3.5)
-    date (3.4.1)
+    date (3.5.1)
     debug (1.11.0)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -274,7 +274,7 @@ GEM
     mutex_m (0.3.0)
     net-http-persistent (4.0.6)
       connection_pool (~> 2.2, >= 2.2.4)
-    net-imap (0.5.10)
+    net-imap (0.5.14)
       date
       net-protocol
     net-pop (0.1.2)
@@ -426,7 +426,7 @@ GEM
       ostruct
     stringio (3.1.7)
     thor (1.4.0)
-    timeout (0.4.3)
+    timeout (0.6.1)
     traject (3.8.3)
       concurrent-ruby (>= 0.8.0)
       csv
