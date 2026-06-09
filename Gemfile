@@ -11,7 +11,7 @@ gem 'rails', '~> 7.2.3'
 # Use Puma as the app server
 gem 'alba', '~> 3.9'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 6.6'
+gem 'puma', '~> 7.2'
 gem 'oj', '~> 3.16'
 gem 'sidekiq', '~> 7.3.9'
 gem 'concurrent-ruby', '~> 1.3'
