@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/boston-library/curator.git
-  revision: 19d9fdccb84bb59207f94aceeeac68fb6ac6dbe5
+  revision: c9d18e6e13a83357c052b801c3a221b7f39e3c56
   specs:
     curator (0.2.0)
       aasm (~> 5.5)
@@ -14,11 +14,11 @@ GIT
       concurrent-ruby-ext (~> 1.3)
       connection_pool (~> 2.5)
       down (~> 5.4)
-      htmlentities (~> 4.3)
+      htmlentities (~> 4.4)
       http (~> 5.3)
       mime-types (~> 3.7)
-      nokogiri (>= 1.18.10)
-      oj (~> 3.16)
+      nokogiri (>= 1.19.3)
+      oj (~> 3.17)
       ox (~> 2.14)
       paper_trail (~> 15.2.0)
       paper_trail-association_tracking (~> 2.3)
@@ -217,7 +217,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
-    htmlentities (4.3.4)
+    htmlentities (4.4.2)
     http (5.3.1)
       addressable (~> 2.8)
       http-cookie (~> 1.0)
@@ -308,7 +308,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.3-x86_64-linux-musl)
       racc (~> 1.4)
-    oj (3.16.11)
+    oj (3.17.3)
       bigdecimal (>= 3.0)
       ostruct (>= 0.2)
     ostruct (0.6.3)
