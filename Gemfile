@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 3.3.10'
+ruby '3.3.11'
 
 gem 'curator', github: 'boston-library/curator'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
@@ -11,11 +11,11 @@ gem 'rails', '~> 7.2.3'
 # Use Puma as the app server
 gem 'alba', '~> 3.9'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 6.6'
-gem 'oj', '~> 3.16'
-gem 'sidekiq', '~> 7.3.9'
+gem 'puma', '~> 7.2'
+gem 'oj', '~> 3.17'
+gem 'sidekiq', '~> 8.0', '< 8.1'
 gem 'concurrent-ruby', '~> 1.3'
-gem 'connection_pool', '~> 2.5'
+gem 'connection_pool', '~> 2.5', '< 3'
 gem 'faraday', '~> 1.10'
 gem 'faraday_middleware','~> 1.0'
 gem 'net-http-persistent', '>= 4'
@@ -25,7 +25,7 @@ gem 'azure-storage-blob', '>= 2', require: false
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 5'
-gem 'rack-cors', '~> 1.1'
+gem 'rack-cors', '~> 2.0'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 
 # NOTE these are required for 'Analyze Jobs' for active storage

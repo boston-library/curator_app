@@ -32,25 +32,27 @@ set :keep_releases, 5
 namespace :boston_library do
   desc 'Gem update'
   task :gem_update do
-    on roles(:app) do
-      execute("#{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do gem update --system --no-document")
-    end
+    puts 'Do gem update --system on the server before deployment now'
+    # on roles(:app) do
+    #   execute("#{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do gem update --system --no-document")
+    # end
   end
 
   desc 'Install new ruby if ruby-version is required'
   task :rvm_install_ruby do
-    on roles(:app) do
-      execute("#{fetch(:rvm_installed)} install #{fetch(:rvm_ruby_version)} -C --with-jemalloc --with-gmp --enable-yjit")
-      execute("#{fetch(:rvm_installed)} use #{fetch(:rvm_ruby_version)}")
-    end
+    puts 'Install ruby on the server before deployment now'
+    # on roles(:app) do
+    #   execute("#{fetch(:rvm_installed)} install #{fetch(:rvm_ruby_version)} -C --with-jemalloc --with-gmp --enable-yjit")
+    #   execute("#{fetch(:rvm_installed)} use #{fetch(:rvm_ruby_version)}")
+    # end
   end
 
-  # desc 'Install bundler 2.3.26'
   desc "Install bundler #{fetch(:rvm_bundle_version)}"
   task :install_bundler do
-    on roles(:app) do
-      execute("#{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do gem install bundler:#{fetch(:rvm_bundle_version)}")
-    end
+    puts "Let default installed bundler resolve correct bundler version"
+    # on roles(:app) do
+    #   execute("#{fetch(:rvm_installed)} #{fetch(:rvm_ruby_version)} do gem install bundler:#{fetch(:rvm_bundle_version)}")
+    # end
   end
 
   ## Update ruby version for systemd service
@@ -77,15 +79,6 @@ namespace :boston_library do
               sudo /bin/systemctl daemon-reload")
     end
   end
-
-  # desc 'Copy Gemfile and Gemfile.lock to shared directory'
-  # task :upload_gemfile do
-  #   on roles(:app) do
-  #     %w[Gemfile Gemfile.lock].each do |f|
-  #       upload! ENV['PWD'] + '/' + f, "#{shared_path}/" + f
-  #     end
-  #   end
-  # end
 
   desc "#{fetch(:application)} restart #{fetch(:application)}_puma service"
   task :"restart_#{fetch(:application)}_puma" do
