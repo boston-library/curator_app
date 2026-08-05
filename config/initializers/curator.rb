@@ -49,15 +49,10 @@ Curator.config do |config|
     }
   end
 
-  config.default_remote_service_timeout_opts = {
-    connect: 120,
-    read: 600,
-    write: 120,
-    keep_alive: 120
-  }
+  config.default_remote_service_timeout_opts = { timeout: 240 }
 
   config.default_remote_service_pool_opts = {
-      size: ENV.fetch('RAILS_MAX_THREADS') { 5 }.to_i + 2,
-      timeout: 15
+    pool_size: ENV.fetch('RAILS_MAX_THREADS', 5).to_i + 1,
+    pool_timeout: 15
   }
 end

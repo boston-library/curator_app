@@ -30,21 +30,19 @@ end
 # Best Practice is to reconnect any non ActiveRecord Connections on boot in clustered mode
 before_worker_boot do
   puts 'Establishing Active Record Connection...'
-  ActiveSupport.on_load(:active_record) do
-    ActiveRecord::Base.establish_connection
-  end
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord)
 
-  if defined?(Curator)
+  if defined?(HttpConnectionPool)
     puts 'Reloading Remote Service Connection Pools...'
-    Curator::Services::RemoteService.reload!
+    HttpConnectionPool::Registry.instance.close_all
   end
 end
 
 before_worker_fork do
-  ActiveRecord::Base.connection_pool.disconnect!
+  ActiveRecord::Base.connection_pool.disconnect! if defined?(ActiveRecord)
 
-  if defined?(Curator)
-    Curator::Services::RemoteService.clear!
+  if defined?(HttpConnectionPool)
+    HttpConnectionPool::Registry.instance.close_all
   end
 end
 
