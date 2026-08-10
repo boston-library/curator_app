@@ -497,6 +497,7 @@ DEPENDENCIES
   rack-cors (~> 2.0)
   rails (~> 7.2.3)
   redis (~> 5)
+  ruby-vips
   sidekiq (~> 8.0, < 8.1)
   solr_wrapper (~> 4.2)
   tzinfo-data

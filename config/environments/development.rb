@@ -34,6 +34,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter  = :sidekiq
   config.active_job.queue_name_prefix = 'curator_app'
+  config.active_job.enqueue_after_transaction_commit = :always
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

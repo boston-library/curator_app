@@ -31,6 +31,7 @@ gem 'rack-cors', '~> 2.0'
 # NOTE these are required for 'Analyze Jobs' for active storage
 gem 'image_processing', '~> 1.14'
 gem 'mini_magick', '~> 5.3'
+gem 'ruby-vips'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

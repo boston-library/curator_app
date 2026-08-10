@@ -63,7 +63,7 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :sidekiq
   config.active_job.queue_name_prefix = "curator_app"
-
+  config.active_job.enqueue_after_transaction_commit = :always
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
